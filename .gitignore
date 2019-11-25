@@ -1,2 +1,8 @@
-
+venv/
+*.pyc
+.idea/
+build/
+dist/
+binance_client.egg-info/
+binance/privateconfig.py
 
