@@ -4,8 +4,8 @@ from binance.base.printobject import *
 
 request_client = RequestClient(api_key=g_api_key, secret_key=g_secret_key)
 system_status = request_client.system_status()
-print("======= SYSTEM STATUS", "=======")
+print("======= System Status (System) =======")
 PrintMix.print_data(system_status)
-print("================================")
+print("======================================")
 
 
