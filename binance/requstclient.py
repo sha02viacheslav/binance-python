@@ -36,3 +36,13 @@ class RequestClient(object):
         Get the system status.
         """
         return call_sync(self.request_impl.system_status())
+
+    def all_coins_information(self) -> any:
+        """
+        All Coins' Information (USER_DATA)
+
+        GET /sapi/v1/capital/config/getall (HMAC SHA256)
+
+        Get all coins' information for user.
+        """
+        return call_sync(self.request_impl.all_coins_information())

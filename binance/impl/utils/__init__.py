@@ -1,5 +1,5 @@
 import json
-from huobi.impl.utils.jsonwrapper import JsonWrapper
+from binance.impl.utils.jsonwrapper import JsonWrapper
 
 
 def parse_json_from_string(value):

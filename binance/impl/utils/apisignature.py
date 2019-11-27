@@ -7,29 +7,18 @@ import urllib.parse
 from binance.exception.binanceapiexception import BinanceApiException
 
 
-def create_signature(api_key, secret_key, method, url, builder):
-    if api_key is None or secret_key is None or api_key == "" or secret_key == "":
-        raise BinanceApiException(BinanceApiException.KEY_MISSING,  "API key and secret key are required")
-
-    timestamp = utc_now()
-    builder.put_url("AccessKeyId", api_key)
-    builder.put_url("SignatureVersion", "2")
-    builder.put_url("SignatureMethod", "HmacSHA256")
-    builder.put_url("Timestamp", timestamp)
-
-    host = urllib.parse.urlparse(url).hostname
-    path = urllib.parse.urlparse(url).path
+def create_signature(secret_key, builder):
+    if secret_key is None or secret_key == "":
+        raise BinanceApiException(BinanceApiException.KEY_MISSING,  "Secret key are required")
 
     # 对参数进行排序:
     keys = sorted(builder.param_map.keys())
     # 加入&
-    qs0 = '&'.join(['%s=%s' % (key, parse.quote(builder.param_map[key], safe='')) for key in keys])
-    # 请求方法，域名，路径，参数 后加入`\n`
-    payload0 = '%s\n%s\n%s\n%s' % (method, host, path, qs0)
-    dig = hmac.new(secret_key.encode('utf-8'), msg=payload0.encode('utf-8'), digestmod=hashlib.sha256).digest()
-    # 进行base64编码
-    s = base64.b64encode(dig).decode()
-    builder.put_url("Signature", s)
+    query_string = '&'.join(['%s=%s' % (key, parse.quote(builder.param_map[key], safe='')) for key in keys])
+
+    signature = hmac.new(secret_key.encode(), msg=query_string.encode(), digestmod=hashlib.sha256).hexdigest()
+    
+    builder.put_url("signature", signature)
 
 
 def utc_now():

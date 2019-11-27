@@ -1,1 +1,1 @@
-from huobi.impl.restapirequest import RestApiRequest
+from binance.impl.restapirequest import RestApiRequest

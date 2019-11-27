@@ -66,9 +66,9 @@ def format_date(value, name):
     if value is None:
         return None
     if not isinstance(value, str):
-        raise HuobiApiException(HuobiApiException.INPUT_ERROR, "[Input] " + name + " must be string")
+        raise BinanceApiException(BinanceApiException.INPUT_ERROR, "[Input] " + name + " must be string")
     try:
         new_time = time.strptime(value, "%Y-%m-%d")
         return time.strftime("%Y-%m-%d", new_time)
     except:
-        raise HuobiApiException(HuobiApiException.INPUT_ERROR, "[Input] " + name + " is not invalid date format")
+        raise BinanceApiException(BinanceApiException.INPUT_ERROR, "[Input] " + name + " is not invalid date format")

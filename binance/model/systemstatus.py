@@ -1,4 +1,3 @@
-from huobi.model.constant import *
 
 
 class SystemStatus:

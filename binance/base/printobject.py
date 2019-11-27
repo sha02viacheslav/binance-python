@@ -179,7 +179,7 @@ class PrintMix:
 
 if __name__ == "__main__":
     """
-    from huobi.model.symbol import Symbol
+    from binance.model.symbol import Symbol
 
     symbol_1 = Symbol()
     symbol_1.amount_precision = 10009

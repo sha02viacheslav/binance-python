@@ -7,5 +7,3 @@ system_status = request_client.system_status()
 print("======= System Status (System) =======")
 PrintMix.print_data(system_status)
 print("======================================")
-
-
