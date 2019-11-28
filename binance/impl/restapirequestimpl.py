@@ -208,8 +208,22 @@ class RestApiRequestImpl(object):
             for item in data_list.get_items():
                 withdraw_history = DepositHistory.json_parse(item)
                 withdraw_historys.append(withdraw_history)
-            PrintMix.print_data(withdraw_historys)
             return withdraw_historys
+
+        request.json_parser = parse
+        return request
+
+    def deposit_address_sapi(self, coin, network):
+        check_should_not_none(coin, "coin")
+        builder = UrlParamsBuilder()
+        builder.put_url("coin", coin)
+        builder.put_url("network", network)
+
+        request = self.__create_request_by_get_with_signature("/sapi/v1/capital/deposit/address", builder)
+
+        def parse(json_wrapper):
+            deposit_address = DepositAddressSapi.json_parse(json_wrapper)
+            return deposit_address
 
         request.json_parser = parse
         return request

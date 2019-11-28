@@ -112,3 +112,13 @@ class RequestClient(object):
         Fetch withdraw history.
         """
         return call_sync(self.request_impl.withdraw_history(asset, status, startTime, endTime))
+
+    def deposit_address_sapi(self, coin: 'str', network: 'str' = None) -> any:
+        """
+        Deposit Address (supporting network) (USER_DATA)
+
+        GET /sapi/v1/capital/deposit/address (HMAC SHA256)
+
+        Fetch deposit address with network.
+        """
+        return call_sync(self.request_impl.deposit_address_sapi(coin, network))
