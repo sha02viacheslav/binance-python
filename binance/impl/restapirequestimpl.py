@@ -168,3 +168,26 @@ class RestApiRequestImpl(object):
 
         request.json_parser = parse
         return request
+   
+    def withdraw_history_sapi(self, coin, status, offest, limit, startTime, endTime):
+        builder = UrlParamsBuilder()
+        builder.put_url("coin", coin)
+        builder.put_url("status", status)
+        builder.put_url("offest", offest)
+        builder.put_url("limit", limit)
+        builder.put_url("startTime", startTime)
+        builder.put_url("endTime", endTime)
+
+        request = self.__create_request_by_get_with_signature("/sapi/v1/capital/withdraw/history", builder)
+
+        def parse(json_wrapper):
+            withdraw_historys = list()
+            data_list = json_wrapper.convert_2_array()
+            for item in data_list.get_items():
+                withdraw_history = WithdrawHistorySapi.json_parse(item)
+                withdraw_historys.append(withdraw_history)
+            PrintMix.print_data(withdraw_historys)
+            return withdraw_historys
+
+        request.json_parser = parse
+        return request
