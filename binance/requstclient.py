@@ -68,3 +68,14 @@ class RequestClient(object):
         Submit a withdraw request.
         """
         return call_sync(self.request_impl.withdraw(asset, address, amount, network, addressTag, name))
+
+    def deposit_history_sapi(self, coin: 'str' = None, status: 'int' = None, startTime: 'long' = None, 
+                                endTime: 'long' = None, offest: 'int' = None) -> any:
+        """
+        Deposit History（supporting network） (USER_DATA)
+
+        GET /sapi/v1/capital/deposit/hisrec (HMAC SHA256)
+
+        Fetch deposit history.
+        """
+        return call_sync(self.request_impl.deposit_history_sapi(coin, status, startTime, endTime, offest))

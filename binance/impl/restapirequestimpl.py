@@ -125,3 +125,25 @@ class RestApiRequestImpl(object):
 
         request.json_parser = parse
         return request
+
+    def deposit_history_sapi(self, coin, status, startTime, endTime, offest):
+        builder = UrlParamsBuilder()
+        builder.put_url("coin", coin)
+        builder.put_url("status", status)
+        builder.put_url("status", status)
+        builder.put_url("startTime", startTime)
+        builder.put_url("offest", offest)
+
+        request = self.__create_request_by_get_with_signature("/sapi/v1/capital/deposit/hisrec", builder)
+
+        def parse(json_wrapper):
+            deposit_historys = list()
+            data_list = json_wrapper.convert_2_array()
+            for item in data_list.get_items():
+                deposit_history = DepositHistorySapi.json_parse(item)
+                deposit_historys.append(deposit_history)
+            PrintMix.print_data(deposit_historys)
+            return deposit_historys
+
+        request.json_parser = parse
+        return request
