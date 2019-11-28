@@ -132,6 +132,7 @@ class RestApiRequestImpl(object):
         builder.put_url("status", status)
         builder.put_url("status", status)
         builder.put_url("startTime", startTime)
+        builder.put_url("endTime", endTime)
         builder.put_url("offest", offest)
 
         request = self.__create_request_by_get_with_signature("/sapi/v1/capital/deposit/hisrec", builder)
@@ -152,8 +153,8 @@ class RestApiRequestImpl(object):
         builder = UrlParamsBuilder()
         builder.put_url("asset", asset)
         builder.put_url("status", status)
-        builder.put_url("status", status)
         builder.put_url("startTime", startTime)
+        builder.put_url("endTime", endTime)
 
         request = self.__create_request_by_get_with_signature("/wapi/v3/depositHistory.html", builder)
 
