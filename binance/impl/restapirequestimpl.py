@@ -242,3 +242,18 @@ class RestApiRequestImpl(object):
 
         request.json_parser = parse
         return request
+
+    def account_status(self):
+        builder = UrlParamsBuilder()
+
+        request = self.__create_request_by_get_with_signature("/wapi/v3/accountStatus.html", builder)
+
+        def parse(json_wrapper):
+            account_status = AccountStatus()
+            account_status.msg = json_wrapper.get_string("msg")
+            if(json_wrapper.contain_key("objs")):
+                account_status.objs = json_wrapper.get_array("objs")
+            return account_status
+
+        request.json_parser = parse
+        return request

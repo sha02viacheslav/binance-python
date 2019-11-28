@@ -132,3 +132,13 @@ class RequestClient(object):
         Fetch deposit address with network.
         """
         return call_sync(self.request_impl.deposit_address(asset, status))
+
+    def account_status(self) -> any:
+        """
+        Account Status (USER_DATA)
+
+        GET /wapi/v3/accountStatus.html
+
+        Fetch account status detail.
+        """
+        return call_sync(self.request_impl.account_status())

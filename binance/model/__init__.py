@@ -7,3 +7,4 @@ from binance.model.withdrawhistorysapi import WithdrawHistorySapi
 from binance.model.withdrawhistory import WithdrawHistory
 from binance.model.depositaddresssapi import DepositAddressSapi
 from binance.model.depositaddress import DepositAddress
+from binance.model.accountstatus import AccountStatus
