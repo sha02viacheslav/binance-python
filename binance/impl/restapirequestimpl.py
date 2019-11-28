@@ -27,10 +27,18 @@ class RestApiRequestImpl(object):
         request = RestApiRequest()
         request.method = "POST"
         request.host = self.__server_url
+        builder.put_url("recvWindow", 60000)
+        builder.put_url("timestamp", str(get_current_timestamp()))
         create_signature(self.__secret_key, builder)
         request.header.update({'Content-Type': 'application/json'})
+        request.header.update({"X-MBX-APIKEY": self.__api_key})
         request.post_body = builder.post_map
         request.url = url + builder.build_url()
+        # For develop
+        print("====== Request ======")
+        print(request)
+        PrintMix.print_data(request)
+        print("=====================")
         return request
 
     def __create_request_by_get_with_signature(self, url, builder):
@@ -74,6 +82,26 @@ class RestApiRequestImpl(object):
                 coin_information = CoinInformation.json_parse(item)
                 all_coins_information.append(coin_information)
             return all_coins_information
+
+        request.json_parser = parse
+        return request
+        
+    def withdraw_sapi(self, coin, address, amount, network, addressTag, name):
+        check_should_not_none(coin, "coin")
+        check_should_not_none(address, "address")
+        check_should_not_none(amount, "amount")
+        builder = UrlParamsBuilder()
+        builder.put_url("coin", coin)
+        builder.put_url("address", address)
+        builder.put_url("amount", amount)
+        builder.put_url("network", network)
+        builder.put_url("addressTag", addressTag)
+        builder.put_url("name", name)
+
+        request = self.__create_request_by_post_with_signature("/sapi/v1/capital/withdraw/apply", builder)
+
+        def parse(json_wrapper):
+            return json_wrapper.get_string_or_default("id", "")
 
         request.json_parser = parse
         return request

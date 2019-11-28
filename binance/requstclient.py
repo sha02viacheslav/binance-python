@@ -46,3 +46,14 @@ class RequestClient(object):
         Get all coins' information for user.
         """
         return call_sync(self.request_impl.all_coins_information())
+
+    def withdraw_sapi(self, coin: 'str', address: 'str', amount: 'float', network: 'str' = None, 
+                        addressTag: 'str' = None, name: 'str' = None) -> str:
+        """
+        Withdraw [SAPI]
+
+        POST /sapi/v1/capital/withdraw/apply (HMAC SHA256)
+
+        Submit a withdraw request.
+        """
+        return call_sync(self.request_impl.withdraw_sapi(coin, address, amount, network, addressTag, name))
