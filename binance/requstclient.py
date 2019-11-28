@@ -122,3 +122,13 @@ class RequestClient(object):
         Fetch deposit address with network.
         """
         return call_sync(self.request_impl.deposit_address_sapi(coin, network))
+
+    def deposit_address(self, asset: 'str', status: 'boolean' = None) -> any:
+        """
+        Deposit Address (USER_DATA)
+
+        GET /wapi/v3/depositAddress.html (HMAC SHA256)
+
+        Fetch deposit address with network.
+        """
+        return call_sync(self.request_impl.deposit_address(asset, status))

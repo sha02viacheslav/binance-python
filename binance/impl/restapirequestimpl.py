@@ -227,3 +227,18 @@ class RestApiRequestImpl(object):
 
         request.json_parser = parse
         return request
+
+    def deposit_address(self, asset, status):
+        check_should_not_none(asset, "asset")
+        builder = UrlParamsBuilder()
+        builder.put_url("asset", asset)
+        builder.put_url("status", status)
+
+        request = self.__create_request_by_get_with_signature("/wapi/v3/depositAddress.html", builder)
+
+        def parse(json_wrapper):
+            deposit_address = DepositAddress.json_parse(json_wrapper)
+            return deposit_address
+
+        request.json_parser = parse
+        return request
