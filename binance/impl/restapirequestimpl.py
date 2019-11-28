@@ -105,3 +105,23 @@ class RestApiRequestImpl(object):
 
         request.json_parser = parse
         return request
+        
+    def withdraw(self, asset, address, amount, network, addressTag, name):
+        check_should_not_none(asset, "asset")
+        check_should_not_none(address, "address")
+        check_should_not_none(amount, "amount")
+        builder = UrlParamsBuilder()
+        builder.put_url("asset", asset)
+        builder.put_url("address", address)
+        builder.put_url("amount", amount)
+        builder.put_url("network", network)
+        builder.put_url("addressTag", addressTag)
+        builder.put_url("name", name)
+
+        request = self.__create_request_by_post_with_signature("/wapi/v3/withdraw.html", builder)
+
+        def parse(json_wrapper):
+            return json_wrapper.get_string_or_default("id", "")
+
+        request.json_parser = parse
+        return request

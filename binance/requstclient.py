@@ -57,3 +57,14 @@ class RequestClient(object):
         Submit a withdraw request.
         """
         return call_sync(self.request_impl.withdraw_sapi(coin, address, amount, network, addressTag, name))
+
+    def withdraw(self, asset: 'str', address: 'str', amount: 'float', network: 'str' = None, 
+                        addressTag: 'str' = None, name: 'str' = None) -> str:
+        """
+        Withdraw
+
+        POST /wapi/v3/withdraw.html (HMAC SHA256)
+
+        Submit a withdraw request.
+        """
+        return call_sync(self.request_impl.withdraw(asset, address, amount, network, addressTag, name))
