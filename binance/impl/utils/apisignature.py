@@ -12,7 +12,7 @@ def create_signature(secret_key, builder):
         raise BinanceApiException(BinanceApiException.KEY_MISSING,  "Secret key are required")
 
     # 对参数进行排序:
-    keys = sorted(builder.param_map.keys())
+    keys = builder.param_map.keys()
     # 加入&
     query_string = '&'.join(['%s=%s' % (key, parse.quote(builder.param_map[key], safe='')) for key in keys])
 
