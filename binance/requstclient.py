@@ -101,3 +101,14 @@ class RequestClient(object):
         Fetch withdraw history.
         """
         return call_sync(self.request_impl.withdraw_history_sapi(coin, status, offset, limit, startTime, endTime))
+
+    def withdraw_history(self, asset: 'str' = None, status: 'int' = None, startTime: 'long' = None, 
+                                endTime: 'long' = None) -> any:
+        """
+        Withdraw History (USER_DATA)
+
+        GET /wapi/v3/withdrawHistory.html (HMAC SHA256)
+
+        Fetch withdraw history.
+        """
+        return call_sync(self.request_impl.withdraw_history(asset, status, startTime, endTime))
