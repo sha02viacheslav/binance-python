@@ -79,3 +79,14 @@ class RequestClient(object):
         Fetch deposit history.
         """
         return call_sync(self.request_impl.deposit_history_sapi(coin, status, startTime, endTime, offest))
+
+    def deposit_history(self, asset: 'str' = None, status: 'int' = None, startTime: 'long' = None, 
+                                endTime: 'long' = None) -> any:
+        """
+        Deposit History (USER_DATA)
+
+        GET /wapi/v3/depositHistory.html (HMAC SHA256)
+
+        Fetch deposit history.
+        """
+        return call_sync(self.request_impl.deposit_history(asset, status, startTime, endTime))
