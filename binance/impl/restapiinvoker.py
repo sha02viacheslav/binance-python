@@ -16,8 +16,9 @@ def check_response(json_wrapper):
                 raise BinanceApiException(BinanceApiException.EXEC_ERROR, "[Executing] " + err_code + ": " + err_msg)
     elif json_wrapper.contain_key("code"):
         code = json_wrapper.get_int("code")
+        msg = json_wrapper.get_string_or_default("msg", "")
         if code != 200:
-            raise BinanceApiException(BinanceApiException.EXEC_ERROR, "[Executing] " + str(code))
+            raise BinanceApiException(BinanceApiException.EXEC_ERROR, "[Executing] " + str(code) + ": " + msg)
 
 
 def call_sync(request):
