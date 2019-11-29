@@ -269,3 +269,15 @@ class RestApiRequestImpl(object):
 
         request.json_parser = parse
         return request
+
+    def dust_log(self):
+        builder = UrlParamsBuilder()
+
+        request = self.__create_request_by_get_with_signature("/wapi/v3/userAssetDribbletLog.html", builder)
+
+        def parse(json_wrapper):
+            dust_logs = DustLogs.json_parse(json_wrapper.get_object("results"))
+            return dust_logs
+
+        request.json_parser = parse
+        return request

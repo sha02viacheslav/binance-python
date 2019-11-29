@@ -9,3 +9,4 @@ from binance.model.depositaddresssapi import DepositAddressSapi
 from binance.model.depositaddress import DepositAddress
 from binance.model.accountstatus import AccountStatus
 from binance.model.accountapitradingstatus import AccountApiTradingStatus
+from binance.model.dustlogs import DustLogs

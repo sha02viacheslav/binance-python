@@ -152,3 +152,13 @@ class RequestClient(object):
         Fetch account api trading status detail.
         """
         return call_sync(self.request_impl.account_api_trading_status())
+
+    def dust_log(self) -> any:
+        """
+        DustLog (USER_DATA)
+
+        GET /wapi/v3/userAssetDribbletLog.html (HMAC SHA256)
+
+        Fetch small amounts of assets exchanged BNB records.
+        """
+        return call_sync(self.request_impl.dust_log())
