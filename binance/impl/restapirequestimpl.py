@@ -257,3 +257,15 @@ class RestApiRequestImpl(object):
 
         request.json_parser = parse
         return request
+
+    def account_api_trading_status(self):
+        builder = UrlParamsBuilder()
+
+        request = self.__create_request_by_get_with_signature("/wapi/v3/apiTradingStatus.html", builder)
+
+        def parse(json_wrapper):
+            account_api_trading_status = AccountApiTradingStatus.json_parse(json_wrapper.get_object("status"))
+            return account_api_trading_status
+
+        request.json_parser = parse
+        return request

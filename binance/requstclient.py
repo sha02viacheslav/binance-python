@@ -142,3 +142,13 @@ class RequestClient(object):
         Fetch account status detail.
         """
         return call_sync(self.request_impl.account_status())
+
+    def account_api_trading_status(self) -> any:
+        """
+        Account API Trading Status (USER_DATA)
+
+        GET /wapi/v3/apiTradingStatus.html
+
+        Fetch account api trading status detail.
+        """
+        return call_sync(self.request_impl.account_api_trading_status())
