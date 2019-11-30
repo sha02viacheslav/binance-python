@@ -281,3 +281,20 @@ class RestApiRequestImpl(object):
 
         request.json_parser = parse
         return request
+
+    def trade_fee(self, symbol):
+        builder = UrlParamsBuilder()
+        builder.put_url("symbol", symbol)
+
+        request = self.__create_request_by_get_with_signature("/wapi/v3/tradeFee.html", builder)
+
+        def parse(json_wrapper):
+            trade_fee_list = list()
+            data_list = json_wrapper.get_array("tradeFee")
+            for item in data_list.get_items():
+                trade_fee = TradeFee.json_parse(item)
+                trade_fee_list.append(trade_fee)
+            return trade_fee_list
+
+        request.json_parser = parse
+        return request

@@ -162,3 +162,13 @@ class RequestClient(object):
         Fetch small amounts of assets exchanged BNB records.
         """
         return call_sync(self.request_impl.dust_log())
+
+    def trade_fee(self, symbol: str = None) -> any:
+        """
+        Trade Fee (USER_DATA)
+
+        GET /wapi/v3/tradeFee.html (HMAC SHA256)
+
+        Fetch trade fee.
+        """
+        return call_sync(self.request_impl.trade_fee(symbol))
