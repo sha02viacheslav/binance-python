@@ -97,4 +97,7 @@ class JsonWrapperArray:
     def get_array_at(self, index):
         return JsonWrapperArray(self.json_object[index])
 
+    def get_object_at(self, index):
+        return JsonWrapper(self.json_object[index])
+
 

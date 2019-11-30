@@ -298,3 +298,26 @@ class RestApiRequestImpl(object):
 
         request.json_parser = parse
         return request
+
+    def asset_detail(self):
+        builder = UrlParamsBuilder()
+
+        request = self.__create_request_by_get_with_signature("/wapi/v3/assetDetail.html", builder)
+
+        def parse(json_wrapper):
+            asset_detail_list = list()
+            data_list = json_wrapper.get_array("assetDetail")
+            for item in data_list.get_items():
+                asset_detail = AssetDetail()
+                asset_detail.asset = item.json_object
+                json_data = data_list.get_object_at(asset_detail.asset)
+                asset_detail.minWithdrawAmount = json_data.get_float("minWithdrawAmount")
+                asset_detail.depositStatus = json_data.get_boolean("depositStatus")
+                asset_detail.withdrawFee = json_data.get_float("withdrawFee")
+                asset_detail.withdrawStatus = json_data.get_boolean("withdrawStatus")
+                asset_detail.depositTip = json_data.get_string_or_default("depositTip", "")
+                asset_detail_list.append(asset_detail)
+            return asset_detail_list
+
+        request.json_parser = parse
+        return request

@@ -172,3 +172,13 @@ class RequestClient(object):
         Fetch trade fee.
         """
         return call_sync(self.request_impl.trade_fee(symbol))
+
+    def asset_detail(self) -> any:
+        """
+        Asset Detail (USER_DATA)
+
+        GET /wapi/v3/assetDetail.html (HMAC SHA256)
+
+        Fetch asset detail.
+        """
+        return call_sync(self.request_impl.asset_detail())

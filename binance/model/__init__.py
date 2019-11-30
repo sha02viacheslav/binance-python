@@ -11,3 +11,4 @@ from binance.model.accountstatus import AccountStatus
 from binance.model.accountapitradingstatus import AccountApiTradingStatus
 from binance.model.dustlogs import DustLogs
 from binance.model.tradefee import TradeFee
+from binance.model.assetdetail import AssetDetail
