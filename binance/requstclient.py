@@ -233,3 +233,15 @@ class RequestClient(object):
         Fetch sub-account deposit address
         """
         return call_sync(self.request_impl.sub_account_deposit_address(email, coin, network))
+
+        
+    def sub_account_deposit_history(self, email: 'str', coin: 'str' = None, status: 'int' = None, startTime: 'long' = None, 
+                                endTime: 'long' = None, offest: 'int' = None) -> any:
+        """
+        Get Sub-account Deposit History (For Master Account)
+
+        GET /sapi/v1/capital/deposit/subHisrec (HMAC SHA256)
+
+        Fetch sub-account deposit history
+        """
+        return call_sync(self.request_impl.sub_account_deposit_history(email, coin, status, startTime, endTime, offest))

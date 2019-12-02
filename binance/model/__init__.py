@@ -15,3 +15,4 @@ from binance.model.assetdetail import AssetDetail
 from binance.model.subaccount import SubAccount
 from binance.model.subaccounttransfer import SubAccountTransfer
 from binance.model.subaccountasset import SubAccountAsset
+from binance.model.subaccountdeposithistory import SubAccountDepositHistory

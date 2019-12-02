@@ -422,3 +422,28 @@ class RestApiRequestImpl(object):
 
         request.json_parser = parse
         return request
+
+        
+    def sub_account_deposit_history(self, email, coin, status, startTime, endTime, offest):
+        check_should_not_none(email, "email")
+        builder = UrlParamsBuilder()
+        builder.put_url("email", email)
+        builder.put_url("coin", coin)
+        builder.put_url("status", status)
+        builder.put_url("status", status)
+        builder.put_url("startTime", startTime)
+        builder.put_url("endTime", endTime)
+        builder.put_url("offest", offest)
+
+        request = self.__create_request_by_get_with_signature("/sapi/v1/capital/deposit/subHisrec", builder)
+
+        def parse(json_wrapper):
+            deposit_historys = list()
+            data_list = json_wrapper.convert_2_array()
+            for item in data_list.get_items():
+                deposit_history = SubAccountDepositHistory.json_parse(item)
+                deposit_historys.append(deposit_history)
+            return deposit_historys
+
+        request.json_parser = parse
+        return request
