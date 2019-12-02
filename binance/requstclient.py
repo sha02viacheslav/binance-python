@@ -203,3 +203,13 @@ class RequestClient(object):
         Fetch transfer history list
         """
         return call_sync(self.request_impl.sub_account_transfer_history(email, startTime, endTime, page, limit))
+
+    def sub_account_transfer(self, fromEmail: 'str', toEmail: 'str', asset: 'str', amount: 'float') -> any:
+        """
+        Sub-account Transfer(For Master Account)
+
+        POST /wapi/v3/sub-account/transfer.html (HMAC SHA256)
+
+        Execute sub-account transfer
+        """
+        return call_sync(self.request_impl.sub_account_transfer(fromEmail, toEmail, asset, amount))

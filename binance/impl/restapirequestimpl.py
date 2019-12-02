@@ -364,3 +364,23 @@ class RestApiRequestImpl(object):
 
         request.json_parser = parse
         return request
+
+    def sub_account_transfer(self, fromEmail, toEmail, asset, amount):
+        check_should_not_none(fromEmail, "fromEmail")
+        check_should_not_none(toEmail, "toEmail")
+        check_should_not_none(asset, "asset")
+        check_should_not_none(amount, "amount")
+        builder = UrlParamsBuilder()
+        builder.put_url("fromEmail", fromEmail)
+        builder.put_url("toEmail", toEmail)
+        builder.put_url("asset", asset)
+        builder.put_url("amount", amount)
+
+        request = self.__create_request_by_post_with_signature("/wapi/v3/sub-account/transfer.html", builder)
+
+        def parse(json_wrapper):
+            txnId = json_wrapper.get_string("txnId")
+            return txnId
+
+        request.json_parser = parse
+        return request
