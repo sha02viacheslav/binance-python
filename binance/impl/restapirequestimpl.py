@@ -447,3 +447,20 @@ class RestApiRequestImpl(object):
 
         request.json_parser = parse
         return request
+        
+    def sub_account_status(self, email):
+        builder = UrlParamsBuilder()
+        builder.put_url("email", email)
+
+        request = self.__create_request_by_get_with_signature("/sapi/v1/sub-account/status", builder)
+
+        def parse(json_wrapper):
+            sub_account_status_list = list()
+            data_list = json_wrapper.convert_2_array()
+            for item in data_list.get_items():
+                sub_accouont_status = SubAccountStatus.json_parse(item)
+                sub_account_status_list.append(sub_accouont_status)
+            return sub_account_status_list
+
+        request.json_parser = parse
+        return request

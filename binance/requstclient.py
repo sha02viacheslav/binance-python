@@ -245,3 +245,12 @@ class RequestClient(object):
         Fetch sub-account deposit history
         """
         return call_sync(self.request_impl.sub_account_deposit_history(email, coin, status, startTime, endTime, offest))
+
+        
+    def sub_account_status(self, email: 'str' = None) -> any:
+        """
+        Get Sub-account's Status on Margin/Futures(For Master Account)
+
+        GET /sapi/v1/sub-account/status (HMAC SHA256)
+        """
+        return call_sync(self.request_impl.sub_account_status(email))
