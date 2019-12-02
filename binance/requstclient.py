@@ -213,3 +213,13 @@ class RequestClient(object):
         Execute sub-account transfer
         """
         return call_sync(self.request_impl.sub_account_transfer(fromEmail, toEmail, asset, amount))
+
+    def sub_account_assets(self, email: 'str', symbol: 'str' =None) -> any:
+        """
+        Query Sub-account Assets(For Master Account)
+
+        GET /wapi/v3/sub-account/assets.html (HMAC SHA256)
+
+        Fetch sub-account assets
+        """
+        return call_sync(self.request_impl.sub_account_assets(email, symbol))

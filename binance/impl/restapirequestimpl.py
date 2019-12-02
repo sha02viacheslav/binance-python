@@ -384,3 +384,23 @@ class RestApiRequestImpl(object):
 
         request.json_parser = parse
         return request
+
+    def sub_account_assets(self, email, symbol):
+        check_should_not_none(email, "email")
+        builder = UrlParamsBuilder()
+        builder.put_url("email", email)
+        builder.put_url("symbol", symbol)
+
+        request = self.__create_request_by_get_with_signature("/wapi/v3/sub-account/assets.html", builder)
+
+        def parse(json_wrapper):
+            sub_account_asset_list = list()
+            data_list = json_wrapper.get_array("balances")
+            for item in data_list.get_items():
+                sub_account_asset = SubAccountAsset().json_parse(item)
+                sub_account_asset_list.append(sub_account_asset)
+            return sub_account_asset_list
+
+
+        request.json_parser = parse
+        return request
