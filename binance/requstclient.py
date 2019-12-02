@@ -182,3 +182,13 @@ class RequestClient(object):
         Fetch asset detail.
         """
         return call_sync(self.request_impl.asset_detail())
+
+    def sub_account_list(self, email: 'str' = None, status: 'str' = None, page: 'int' = None, limit: 'int' = None) -> any:
+        """
+        Query Sub-account List(For Master Account)
+
+        GET /wapi/v3/sub-account/list.html (HMAC SHA256)
+
+        Fetch sub account list.
+        """
+        return call_sync(self.request_impl.sub_account_list(email, status, page, limit))

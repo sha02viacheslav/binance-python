@@ -321,3 +321,19 @@ class RestApiRequestImpl(object):
 
         request.json_parser = parse
         return request
+
+    def sub_account_list(self, email, status, page, limit):
+        builder = UrlParamsBuilder()
+
+        request = self.__create_request_by_get_with_signature("/wapi/v3/sub-account/list.html", builder)
+
+        def parse(json_wrapper):
+            sub_account_list = list()
+            data_list = json_wrapper.get_array("subAccounts")
+            for item in data_list.get_items():
+                sub_account = SubAccount().json_parse(item)
+                sub_account_list.append(sub_account)
+            return sub_account_list
+
+        request.json_parser = parse
+        return request
