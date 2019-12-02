@@ -323,7 +323,12 @@ class RestApiRequestImpl(object):
         return request
 
     def sub_account_list(self, email, status, page, limit):
+        check_should_not_none(email, "email")
         builder = UrlParamsBuilder()
+        builder.put_url("email", email)
+        builder.put_url("status", status)
+        builder.put_url("page", page)
+        builder.put_url("limit", limit)
 
         request = self.__create_request_by_get_with_signature("/wapi/v3/sub-account/list.html", builder)
 
