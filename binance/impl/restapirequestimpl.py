@@ -337,3 +337,25 @@ class RestApiRequestImpl(object):
 
         request.json_parser = parse
         return request
+
+    def sub_account_transfer_history(self, email, startTime, endTime, page, limit):
+        check_should_not_none(email, "email")
+        builder = UrlParamsBuilder()
+        builder.put_url("email", email)
+        builder.put_url("startTime", startTime)
+        builder.put_url("endTime", endTime)
+        builder.put_url("page", page)
+        builder.put_url("limit", limit)
+
+        request = self.__create_request_by_get_with_signature("/wapi/v3/sub-account/transfer/history.html", builder)
+
+        def parse(json_wrapper):
+            sub_account_transfer_history = list()
+            data_list = json_wrapper.get_array("transfers")
+            for item in data_list.get_items():
+                sub_account_transfer = SubAccountTransfer().json_parse(item)
+                sub_account_transfer_history.append(sub_account_transfer)
+            return sub_account_transfer_history
+
+        request.json_parser = parse
+        return request

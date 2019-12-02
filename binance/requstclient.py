@@ -192,3 +192,14 @@ class RequestClient(object):
         Fetch sub account list.
         """
         return call_sync(self.request_impl.sub_account_list(email, status, page, limit))
+
+    def sub_account_transfer_history(self, email: 'str', startTime: 'int' = None, endTime: 'int' = None, 
+                                        page: 'int' = None, limit: 'int' = None) -> any:
+        """
+        Query Sub-account Transfer History(For Master Account)
+
+        GET /wapi/v3/sub-account/transfer/history.html (HMAC SHA256)
+
+        Fetch transfer history list
+        """
+        return call_sync(self.request_impl.sub_account_transfer_history(email, startTime, endTime, page, limit))

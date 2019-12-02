@@ -13,3 +13,4 @@ from binance.model.dustlogs import DustLogs
 from binance.model.tradefee import TradeFee
 from binance.model.assetdetail import AssetDetail
 from binance.model.subaccount import SubAccount
+from binance.model.subaccounttransfer import SubAccountTransfer
