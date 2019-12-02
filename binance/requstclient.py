@@ -254,3 +254,11 @@ class RequestClient(object):
         GET /sapi/v1/sub-account/status (HMAC SHA256)
         """
         return call_sync(self.request_impl.sub_account_status(email))
+        
+    def sub_account_enable_margin(self, email: 'str' = None) -> any:
+        """
+        Enable Margin for Sub-account (For Master Account)
+
+        POST /sapi/v1/sub-account/margin/enable (HMAC SHA256)
+        """
+        return call_sync(self.request_impl.sub_account_enable_margin(email))

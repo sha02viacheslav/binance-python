@@ -464,3 +464,21 @@ class RestApiRequestImpl(object):
 
         request.json_parser = parse
         return request
+        
+    def sub_account_enable_margin(self, email):
+        check_should_not_none(email, "email")
+        builder = UrlParamsBuilder()
+        builder.put_url("email", email)
+
+        request = self.__create_request_by_post_with_signature("/sapi/v1/sub-account/margin/enable", builder)
+
+        def parse(json_wrapper):
+            if json_wrapper.contain_key("isMarginEnabled"):
+                isMarginEnabled = json_wrapper.get_string("isMarginEnabled")
+                if isMarginEnabled == "true":
+                    margin_email = json_wrapper.get_string("email")
+                    return margin_email
+            return None
+
+        request.json_parser = parse
+        return request
