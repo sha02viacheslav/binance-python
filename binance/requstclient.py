@@ -214,7 +214,7 @@ class RequestClient(object):
         """
         return call_sync(self.request_impl.sub_account_transfer(fromEmail, toEmail, asset, amount))
 
-    def sub_account_assets(self, email: 'str', symbol: 'str' =None) -> any:
+    def sub_account_assets(self, email: 'str', symbol: 'str' = None) -> any:
         """
         Query Sub-account Assets(For Master Account)
 
@@ -223,3 +223,13 @@ class RequestClient(object):
         Fetch sub-account assets
         """
         return call_sync(self.request_impl.sub_account_assets(email, symbol))
+
+    def sub_account_deposit_address(self, email: 'str', coin: 'str',  network: 'str' = None) -> any:
+        """
+        Get Sub-account Deposit Address (For Master Account)
+
+        GET /sapi/v1/capital/deposit/subAddress (HMAC SHA256)
+
+        Fetch sub-account deposit address
+        """
+        return call_sync(self.request_impl.sub_account_deposit_address(email, coin, network))

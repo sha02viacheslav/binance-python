@@ -404,3 +404,21 @@ class RestApiRequestImpl(object):
 
         request.json_parser = parse
         return request
+
+    def sub_account_deposit_address(self, email, coin, network):
+        check_should_not_none(email, "email")
+        check_should_not_none(coin, "coin")
+        builder = UrlParamsBuilder()
+        builder.put_url("email", email)
+        builder.put_url("coin", coin)
+        builder.put_url("network", network)
+
+        request = self.__create_request_by_get_with_signature("/sapi/v1/capital/deposit/subAddress", builder)
+
+        def parse(json_wrapper):
+            sub_account_deposit_address = DepositAddressSapi.json_parse(json_wrapper)
+            return sub_account_deposit_address
+
+
+        request.json_parser = parse
+        return request
