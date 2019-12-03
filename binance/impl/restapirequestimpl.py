@@ -482,3 +482,17 @@ class RestApiRequestImpl(object):
 
         request.json_parser = parse
         return request
+        
+    def sub_account_margin_detail(self, email):
+        check_should_not_none(email, "email")
+        builder = UrlParamsBuilder()
+        builder.put_url("email", email)
+
+        request = self.__create_request_by_get_with_signature("/sapi/v1/sub-account/margin/account", builder)
+
+        def parse(json_wrapper):
+            sub_account_margin_detail = SubAccountMarginDetail.json_parse(json_wrapper)
+            return sub_account_margin_detail
+
+        request.json_parser = parse
+        return request
