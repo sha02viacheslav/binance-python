@@ -614,5 +614,16 @@ class RestApiRequestImpl(object):
 
         request.json_parser = parse
         return request
+        
+    def check_servertime(self):
+        builder = UrlParamsBuilder()
+        request = self.__create_request_by_get("/api/v3/time", builder)
+
+        def parse(json_wrapper):
+            server_time = convert_cst_in_millisecond_to_utc(json_wrapper.get_int("serverTime"))
+            return server_time
+
+        request.json_parser = parse
+        return request
       
         

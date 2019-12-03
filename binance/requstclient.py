@@ -330,3 +330,13 @@ class RequestClient(object):
         Query asset dividend record.
         """
         return call_sync(self.request_impl.asset_dividend_record(asset, startTime, endTime))
+           
+    def check_servertime(self) -> any:
+        """
+        Check Server Time
+
+        GET /api/v3/time
+
+        Test connectivity to the Rest API and get the current server time.
+        """
+        return call_sync(self.request_impl.check_servertime())
