@@ -508,3 +508,22 @@ class RestApiRequestImpl(object):
 
         request.json_parser = parse
         return request
+      
+    def sub_account_enable_futures(self, email):
+        check_should_not_none(email, "email")
+        builder = UrlParamsBuilder()
+        builder.put_url("email", email)
+
+        request = self.__create_request_by_post_with_signature("/sapi/v1/sub-account/futures/enable", builder)
+
+        def parse(json_wrapper):
+            if json_wrapper.contain_key("isFuturesEnabled"):
+                isFuturesEnabled = json_wrapper.get_string("isFuturesEnabled")
+                if isFuturesEnabled == "true":
+                    futures_email = json_wrapper.get_string("email")
+                    return futures_email
+            return None
+
+        request.json_parser = parse
+        return request
+        

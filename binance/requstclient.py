@@ -278,3 +278,11 @@ class RequestClient(object):
         GET /sapi/v1/sub-account/margin/accountSummary (HMAC SHA256)
         """
         return call_sync(self.request_impl.sub_account_margin_summary())
+         
+    def sub_account_enable_futures(self, email: 'str' = None) -> any:
+        """
+        Enable Futures for Sub-account (For Master Account)
+
+        POST /sapi/v1/sub-account/futures/enable (HMAC SHA256)
+        """
+        return call_sync(self.request_impl.sub_account_enable_futures(email))
