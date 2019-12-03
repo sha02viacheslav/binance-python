@@ -310,3 +310,13 @@ class RequestClient(object):
         GET /sapi/v1/sub-account/futures/positionRisk (HMAC SHA256)
         """
         return call_sync(self.request_impl.sub_account_futures_positionrisk(email))
+           
+    def dust_transfer(self, asset: 'list') -> any:
+        """
+        Dust Transfer (USER_DATA)
+
+        Post /sapi/v1/asset/dust (HMAC SHA256)
+
+        Convert dust assets to BNB.
+        """
+        return call_sync(self.request_impl.dust_transfer(asset))

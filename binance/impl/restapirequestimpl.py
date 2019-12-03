@@ -1,6 +1,7 @@
 from binance.impl import RestApiRequest
 from binance.impl.utils.urlparamsbuilder import UrlParamsBuilder
 from binance.impl.utils.apisignature import create_signature
+from binance.impl.utils.apisignature import create_signature_with_query
 from binance.impl.utils.inputchecker import *
 from binance.impl.utils.timeservice import *
 from binance.model import *
@@ -567,6 +568,34 @@ class RestApiRequestImpl(object):
                 sub_account_futures_positionrisk = SubAccountFuturesPositionrisk.json_parse(item)
                 sub_account_futures_positionrisk_list.append(sub_account_futures_positionrisk)
             return sub_account_futures_positionrisk_list
+
+        request.json_parser = parse
+        return request
+
+    def dust_transfer(self, asset):
+        check_should_not_none(asset, "asset")
+        query_string = "recvWindow=60000"
+        query_string += "&timestamp=" + str(get_current_timestamp())
+        for item in asset:
+            query_string += "&asset=" + item
+
+        request = RestApiRequest()
+        request.method = "POST"
+        request.host = self.__server_url
+        signature = create_signature_with_query(self.__secret_key, query_string)
+        query_string += "&signature=" + signature
+        request.header.update({'Content-Type': 'application/json'})
+        request.header.update({"X-MBX-APIKEY": self.__api_key})
+        request.url = "/sapi/v1/asset/dust?" + query_string
+        # For develop
+        print("====== Request ======")
+        print(request)
+        PrintMix.print_data(request)
+        print("=====================")
+
+        def parse(json_wrapper):
+            dust_transfer = DustTransfer.json_parse(json_wrapper)
+            return dust_transfer
 
         request.json_parser = parse
         return request
