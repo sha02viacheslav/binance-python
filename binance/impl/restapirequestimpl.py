@@ -496,3 +496,15 @@ class RestApiRequestImpl(object):
 
         request.json_parser = parse
         return request
+        
+    def sub_account_margin_summary(self):
+        builder = UrlParamsBuilder()
+
+        request = self.__create_request_by_get_with_signature("/sapi/v1/sub-account/margin/accountSummary", builder)
+
+        def parse(json_wrapper):
+            sub_account_margin_summary = SubAccountMarginSummary.json_parse(json_wrapper)
+            return sub_account_margin_summary
+
+        request.json_parser = parse
+        return request
