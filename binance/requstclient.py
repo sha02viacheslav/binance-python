@@ -320,3 +320,13 @@ class RequestClient(object):
         Convert dust assets to BNB.
         """
         return call_sync(self.request_impl.dust_transfer(asset))
+           
+    def asset_dividend_record(self, asset: 'str' = None, startTime: 'long' = None, endTime: 'long' = None) -> any:
+        """
+        Asset Dividend Record (USER_DATA)
+
+        Get /sapi/v1/asset/assetDividend (HMAC SHA256)
+
+        Query asset dividend record.
+        """
+        return call_sync(self.request_impl.asset_dividend_record(asset, startTime, endTime))

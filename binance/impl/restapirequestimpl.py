@@ -599,5 +599,20 @@ class RestApiRequestImpl(object):
 
         request.json_parser = parse
         return request
+
+    def asset_dividend_record(self, asset, startTime, endTime):
+        builder = UrlParamsBuilder()
+        builder.put_url("asset", asset)
+        builder.put_url("startTime", startTime)
+        builder.put_url("endTime", endTime)
+
+        request = self.__create_request_by_get_with_signature("/sapi/v1/asset/assetDividend", builder)
+
+        def parse(json_wrapper):
+            asset_dividend_record = AssetDividendRecord.json_parse(json_wrapper)
+            return asset_dividend_record
+
+        request.json_parser = parse
+        return request
       
         

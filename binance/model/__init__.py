@@ -23,3 +23,4 @@ from binance.model.subaccountfuturesdetail import SubAccountFuturesDetail
 from binance.model.subaccountfuturessummary import SubAccountFuturesSummary
 from binance.model.subaccountfuturespositionrisk import SubAccountFuturesPositionrisk
 from binance.model.dusttransfer import DustTransfer
+from binance.model.assetdividendrecord import AssetDividendRecord
