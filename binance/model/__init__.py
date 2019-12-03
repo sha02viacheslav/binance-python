@@ -19,3 +19,4 @@ from binance.model.subaccountdeposithistory import SubAccountDepositHistory
 from binance.model.subaccountstatus import SubAccountStatus
 from binance.model.subaccountmargindetail import SubAccountMarginDetail
 from binance.model.subaccountmarginsummary import SubAccountMarginSummary
+from binance.model.subaccountfuturesdetail import SubAccountFuturesDetail

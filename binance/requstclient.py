@@ -285,4 +285,12 @@ class RequestClient(object):
 
         POST /sapi/v1/sub-account/futures/enable (HMAC SHA256)
         """
-        return call_sync(self.request_impl.sub_account_enable_futures(email))
+        return call_sync(self.request_impl.sub_account_enable_futures(email)) 
+
+    def sub_account_futures_detail(self, email: 'str') -> any:
+        """
+        Get Detail on Sub-account's Futures Account (For Master Account)
+
+        GET /sapi/v1/sub-account/futures/account (HMAC SHA256)
+        """
+        return call_sync(self.request_impl.sub_account_futures_detail(email))
