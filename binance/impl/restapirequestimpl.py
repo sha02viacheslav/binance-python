@@ -552,5 +552,23 @@ class RestApiRequestImpl(object):
 
         request.json_parser = parse
         return request
+                
+    def sub_account_futures_positionrisk(self, email):
+        check_should_not_none(email, "email")
+        builder = UrlParamsBuilder()
+        builder.put_url("email", email)
+
+        request = self.__create_request_by_get_with_signature("/sapi/v1/sub-account/futures/positionRisk", builder)
+
+        def parse(json_wrapper):
+            sub_account_futures_positionrisk_list = list()
+            data_list = json_wrapper.convert_2_array()
+            for item in data_list.get_items():
+                sub_account_futures_positionrisk = SubAccountFuturesPositionrisk.json_parse(item)
+                sub_account_futures_positionrisk_list.append(sub_account_futures_positionrisk)
+            return sub_account_futures_positionrisk_list
+
+        request.json_parser = parse
+        return request
       
         

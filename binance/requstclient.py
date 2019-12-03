@@ -302,3 +302,11 @@ class RequestClient(object):
         GET /sapi/v1/sub-account/futures/accountSummary (HMAC SHA256)
         """
         return call_sync(self.request_impl.sub_account_futures_summary())
+           
+    def sub_account_futures_positionrisk(self, email: 'str') -> any:
+        """
+        Get Futures Postion-Risk of Sub-account (For Master Account)
+
+        GET /sapi/v1/sub-account/futures/positionRisk (HMAC SHA256)
+        """
+        return call_sync(self.request_impl.sub_account_futures_positionrisk(email))
