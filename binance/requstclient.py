@@ -340,3 +340,13 @@ class RequestClient(object):
         Test connectivity to the Rest API and get the current server time.
         """
         return call_sync(self.request_impl.check_servertime())
+           
+    def exchange_information(self) -> any:
+        """
+        Exchange Information
+
+        GET /api/v3/exchangeInfo
+
+        Current exchange trading rules and symbol information
+        """
+        return call_sync(self.request_impl.exchange_information())

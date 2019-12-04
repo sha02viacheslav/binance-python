@@ -625,5 +625,16 @@ class RestApiRequestImpl(object):
 
         request.json_parser = parse
         return request
+        
+    def exchange_information(self):
+        builder = UrlParamsBuilder()
+        request = self.__create_request_by_get("/api/v3/exchangeInfo", builder)
+
+        def parse(json_wrapper):
+            exchange_information = ExchangeInformation.json_parse(json_wrapper)
+            return exchange_information
+
+        request.json_parser = parse
+        return request
       
         

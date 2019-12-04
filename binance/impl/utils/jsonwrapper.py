@@ -67,6 +67,19 @@ class JsonWrapper:
     def convert_2_array(self):
         return JsonWrapperArray(self.json_object)
 
+    def convert_2_dict(self):
+        items = dict()
+        for item in self.json_object:
+            name = item
+            items[name] = self.json_object[name]
+        return items
+
+    def convert_2_list(self):
+        items = list()
+        for item in self.json_object:
+            items.append(item)
+        return items
+
 
 
 class JsonWrapperArray:
