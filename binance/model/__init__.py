@@ -30,3 +30,4 @@ from binance.model.orderbook import OrderBook
 from binance.model.trade import Trade
 from binance.model.aggregatetrade import AggregateTrade
 from binance.model.candlestick import Candlestick
+from binance.model.averageprice import AveragePrice

@@ -403,3 +403,13 @@ class RequestClient(object):
         Klines are uniquely identified by their open time.
         """
         return call_sync(self.request_impl.candlestick_data(symbol, interval, startTime, endTime, limit))
+           
+    def current_average_price(self, symbol: 'str') -> any:
+        """
+        Current Average Price
+
+        GET /api/v3/avgPrice
+
+        Current average price for a symbol.
+        """
+        return call_sync(self.request_impl.current_average_price(symbol))

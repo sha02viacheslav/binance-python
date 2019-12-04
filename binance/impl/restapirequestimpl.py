@@ -745,4 +745,19 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
       
+    def current_average_price(self, symbol):
+        check_should_not_none(symbol, "symbol")
+        builder = UrlParamsBuilder()
+        builder.put_url("symbol", symbol)
+
+        request = self.__create_request_by_get_with_apikey("/api/v3/avgPrice", builder)
+
+        def parse(json_wrapper):
+            current_average_price = AveragePrice.json_parse(json_wrapper)
+           
+            return current_average_price
+
+        request.json_parser = parse
+        return request
+      
         
