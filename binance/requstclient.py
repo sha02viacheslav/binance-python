@@ -433,3 +433,13 @@ class RequestClient(object):
         Latest price for a symbol or symbols.
         """
         return call_sync(self.request_impl.symbol_price_ticker(symbol))
+           
+    def symbol_orderbook_ticker(self, symbol: 'str' = None) -> any:
+        """
+        Symbol Order Book Ticker
+
+        GET /api/v3/ticker/bookTicker
+
+        Best price/qty on the order book for a symbol or symbols.
+        """
+        return call_sync(self.request_impl.symbol_orderbook_ticker(symbol))

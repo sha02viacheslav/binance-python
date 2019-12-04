@@ -806,4 +806,27 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
       
+    def symbol_orderbook_ticker(self, symbol):
+        builder = UrlParamsBuilder()
+        builder.put_url("symbol", symbol)
+
+        request = self.__create_request_by_get("/api/v3/ticker/bookTicker", builder)
+
+        def parse(json_wrapper):
+            symbol_orderbook_list = list()
+
+            if symbol:
+                information = SymbolOrderbook.json_parse(json_wrapper)
+                symbol_orderbook_list.append(information)
+            else:
+                data_list = json_wrapper.convert_2_array()
+                for item in data_list.get_items():
+                    information = SymbolOrderbook.json_parse(item)
+                    symbol_orderbook_list.append(information)
+
+            return symbol_orderbook_list
+
+        request.json_parser = parse
+        return request
+      
         
