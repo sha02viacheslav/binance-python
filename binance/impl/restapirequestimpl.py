@@ -24,6 +24,15 @@ class RestApiRequestImpl(object):
         request.url = url + builder.build_url()
         return request
 
+    def __create_request_by_get_with_apikey(self, url, builder):
+        request = RestApiRequest()
+        request.method = "GET"
+        request.host = self.__server_url
+        request.header.update({'Content-Type': 'application/json'})
+        request.header.update({"X-MBX-APIKEY": self.__api_key})
+        request.url = url + builder.build_url()
+        return request
+
     def __create_request_by_post_with_signature(self, url, builder):
         request = RestApiRequest()
         request.method = "POST"
@@ -667,6 +676,26 @@ class RestApiRequestImpl(object):
                 trade = Trade.json_parse(item)
                 recent_trade_list.append(trade)
             return recent_trade_list
+
+        request.json_parser = parse
+        return request
+      
+    def old_trade_lookup(self, symbol, limit, fromId):
+        check_should_not_none(symbol, "symbol")
+        builder = UrlParamsBuilder()
+        builder.put_url("symbol", symbol)
+        builder.put_url("limit", limit)
+        builder.put_url("fromId", fromId)
+
+        request = self.__create_request_by_get_with_apikey("/api/v3/historicalTrades", builder)
+
+        def parse(json_wrapper):
+            old_trade_list = list()
+            data_list = json_wrapper.convert_2_array()
+            for item in data_list.get_items():
+                trade = Trade.json_parse(item)
+                old_trade_list.append(trade)
+            return old_trade_list
 
         request.json_parser = parse
         return request

@@ -368,3 +368,13 @@ class RequestClient(object):
         Get recent trades (up to last 500).
         """
         return call_sync(self.request_impl.recent_trades_list(symbol, limit))
+           
+    def old_trade_lookup(self, symbol: 'str', limit: 'int' = None, fromId: 'long' = None) -> any:
+        """
+        Old Trade Lookup
+
+        GET /api/v3/historicalTrades
+
+        Get older market trades.
+        """
+        return call_sync(self.request_impl.old_trade_lookup(symbol, limit, fromId))
