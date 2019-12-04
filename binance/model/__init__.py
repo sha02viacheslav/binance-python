@@ -26,3 +26,4 @@ from binance.model.dusttransfer import DustTransfer
 from binance.model.assetdividendrecord import AssetDividendRecord
 from binance.model.exchangeinformation import ExchangeInformation
 from binance.model.orderbook import OrderBook
+from binance.model.trade import Trade

@@ -636,8 +636,7 @@ class RestApiRequestImpl(object):
 
         request.json_parser = parse
         return request
-      
-        
+            
     def order_book(self, symbol, limit):
         check_should_not_none(symbol, "symbol")
         builder = UrlParamsBuilder()
@@ -649,6 +648,25 @@ class RestApiRequestImpl(object):
         def parse(json_wrapper):
             order_book = OrderBook.json_parse(json_wrapper)
             return order_book
+
+        request.json_parser = parse
+        return request
+      
+    def recent_trades_list(self, symbol, limit):
+        check_should_not_none(symbol, "symbol")
+        builder = UrlParamsBuilder()
+        builder.put_url("symbol", symbol)
+        builder.put_url("limit", limit)
+
+        request = self.__create_request_by_get("/api/v3/trades", builder)
+
+        def parse(json_wrapper):
+            recent_trade_list = list()
+            data_list = json_wrapper.convert_2_array()
+            for item in data_list.get_items():
+                trade = Trade.json_parse(item)
+                recent_trade_list.append(trade)
+            return recent_trade_list
 
         request.json_parser = parse
         return request

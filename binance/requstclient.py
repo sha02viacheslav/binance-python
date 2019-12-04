@@ -358,3 +358,13 @@ class RequestClient(object):
         GET /api/v3/depth
         """
         return call_sync(self.request_impl.order_book(symbol, limit))
+           
+    def recent_trades_list(self, symbol: 'str', limit: 'int' = None) -> any:
+        """
+        Recent Trades List
+
+        GET /api/v3/trades
+
+        Get recent trades (up to last 500).
+        """
+        return call_sync(self.request_impl.recent_trades_list(symbol, limit))
