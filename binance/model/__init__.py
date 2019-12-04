@@ -25,3 +25,4 @@ from binance.model.subaccountfuturespositionrisk import SubAccountFuturesPositio
 from binance.model.dusttransfer import DustTransfer
 from binance.model.assetdividendrecord import AssetDividendRecord
 from binance.model.exchangeinformation import ExchangeInformation
+from binance.model.orderbook import OrderBook

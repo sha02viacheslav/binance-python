@@ -638,3 +638,19 @@ class RestApiRequestImpl(object):
         return request
       
         
+    def order_book(self, symbol, limit):
+        check_should_not_none(symbol, "symbol")
+        builder = UrlParamsBuilder()
+        builder.put_url("symbol", symbol)
+        builder.put_url("limit", limit)
+
+        request = self.__create_request_by_get("/api/v3/depth", builder)
+
+        def parse(json_wrapper):
+            order_book = OrderBook.json_parse(json_wrapper)
+            return order_book
+
+        request.json_parser = parse
+        return request
+      
+        

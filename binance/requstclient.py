@@ -350,3 +350,11 @@ class RequestClient(object):
         Current exchange trading rules and symbol information
         """
         return call_sync(self.request_impl.exchange_information())
+           
+    def order_book(self, symbol: 'str', limit: 'int' = None) -> any:
+        """
+        Order Book
+
+        GET /api/v3/depth
+        """
+        return call_sync(self.request_impl.order_book(symbol, limit))
