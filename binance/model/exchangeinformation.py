@@ -1,6 +1,3 @@
-from binance.impl.utils.timeservice import convert_cst_in_millisecond_to_utc
-
-
 class RateLimit:
 
     def __init__(self):
@@ -47,7 +44,7 @@ class ExchangeInformation:
     def json_parse(json_data):
         exchange_information = ExchangeInformation()
         exchange_information.timezone = json_data.get_string("timezone")
-        exchange_information.serverTime = convert_cst_in_millisecond_to_utc(json_data.get_int("serverTime"))
+        exchange_information.serverTime = json_data.get_int("serverTime")
 
         list_array = json_data.get_array("rateLimits")
         rate_limit_list = list()

@@ -1,6 +1,3 @@
-from binance.impl.utils.timeservice import convert_cst_in_millisecond_to_utc
-
-
 class SubAccount:
 
     def __init__(self):

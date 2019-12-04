@@ -1,6 +1,3 @@
-from binance.impl.utils.timeservice import convert_cst_in_millisecond_to_utc
-
-
 class TickerPriceChangeStatistics:
 
     def __init__(self):
@@ -41,8 +38,8 @@ class TickerPriceChangeStatistics:
         ticker_price_change.lowPrice = json_data.get_float("lowPrice")
         ticker_price_change.volume = json_data.get_float("volume")
         ticker_price_change.quoteVolume = json_data.get_float("quoteVolume")
-        ticker_price_change.openTime = convert_cst_in_millisecond_to_utc(json_data.get_int("openTime"))
-        ticker_price_change.closeTime = convert_cst_in_millisecond_to_utc(json_data.get_int("closeTime"))
+        ticker_price_change.openTime = json_data.get_int("openTime")
+        ticker_price_change.closeTime = json_data.get_int("closeTime")
         ticker_price_change.firstId = json_data.get_int("firstId")
         ticker_price_change.lastId = json_data.get_int("lastId")
         ticker_price_change.count = json_data.get_int("count")

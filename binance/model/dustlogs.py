@@ -1,6 +1,3 @@
-from binance.impl.utils.timeservice import convert_cst_in_millisecond_to_utc
-from binance.base.printobject import *
-
 class Log:
 
     def __init__(self):

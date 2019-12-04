@@ -1,6 +1,3 @@
-from binance.impl.utils.timeservice import convert_cst_in_millisecond_to_utc
-from binance.base.printobject import *
-
 class TriggerCondition:
 
     def __init__(self):
@@ -41,7 +38,7 @@ class AccountApiTradingStatus:
         account_api_trading_status = AccountApiTradingStatus()
         account_api_trading_status.isLocked = json_data.get_boolean("isLocked")
         account_api_trading_status.plannedRecoverTime = json_data.get_int("plannedRecoverTime")
-        account_api_trading_status.updateTime = convert_cst_in_millisecond_to_utc(json_data.get_int("updateTime"))
+        account_api_trading_status.updateTime = json_data.get_int("updateTime")
         account_api_trading_status.triggerCondition = TriggerCondition()
         account_api_trading_status.triggerCondition.GCR = json_data.get_object("triggerCondition").get_string("GCR")
         account_api_trading_status.triggerCondition.IFER = json_data.get_object("triggerCondition").get_string("IFER")

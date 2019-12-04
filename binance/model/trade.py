@@ -1,6 +1,3 @@
-from binance.impl.utils.timeservice import convert_cst_in_millisecond_to_utc
-
-
 class Trade:
 
     def __init__(self):
@@ -19,7 +16,7 @@ class Trade:
         trade.price = json_data.get_float("price")
         trade.qty = json_data.get_float("qty")
         trade.quoteQty = json_data.get_float("quoteQty")
-        trade.time = convert_cst_in_millisecond_to_utc(json_data.get_int("time"))
+        trade.time = json_data.get_int("time")
         trade.isBuyerMaker = json_data.get_boolean("isBuyerMaker")
         trade.isBestMatch = json_data.get_boolean("isBestMatch")
         

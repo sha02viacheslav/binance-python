@@ -1,6 +1,3 @@
-from binance.impl.utils.timeservice import convert_cst_in_millisecond_to_utc
-
-
 class DepositHistory:
 
     def __init__(self):
@@ -14,7 +11,7 @@ class DepositHistory:
     @staticmethod
     def json_parse(json_data):
         deposit_history = DepositHistory()
-        deposit_history.insertTime = convert_cst_in_millisecond_to_utc(json_data.get_int("insertTime"))
+        deposit_history.insertTime = json_data.get_int("insertTime")
         deposit_history.amount = json_data.get_float("amount")
         deposit_history.asset = json_data.get_string("asset")
         deposit_history.address = json_data.get_string("address")

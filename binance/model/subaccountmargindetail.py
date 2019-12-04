@@ -1,6 +1,3 @@
-from binance.impl.utils.timeservice import convert_cst_in_millisecond_to_utc
-
-
 class MarginTradeCoeffVo:
 
     def __init__(self):

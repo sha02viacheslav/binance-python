@@ -1,6 +1,3 @@
-from binance.impl.utils.timeservice import convert_cst_in_millisecond_to_utc
-from binance.base.printobject import *
-
 class Record:
 
     def __init__(self):
@@ -28,7 +25,7 @@ class AssetDividendRecord:
             record = Record()
             record.amount = item.get_float("amount")
             record.asset = item.get_string("asset")
-            record.divTime = convert_cst_in_millisecond_to_utc(item.get_int("divTime"))
+            record.divTime = item.get_int("divTime")
             record.enInfo = item.get_string("enInfo")
             record.tranId = item.get_int("tranId")
 

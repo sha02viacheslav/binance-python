@@ -1,6 +1,3 @@
-from binance.impl.utils.timeservice import convert_cst_in_millisecond_to_utc
-
-
 class TransferLog:
 
     def __init__(self):
@@ -31,7 +28,7 @@ class DustTransfer:
             transfer_log = TransferLog()
             transfer_log.amount = item.get_float("amount")
             transfer_log.fromAsset = item.get_string("fromAsset")
-            transfer_log.operateTime = convert_cst_in_millisecond_to_utc(item.get_int("operateTime"))
+            transfer_log.operateTime = item.get_int("operateTime")
             transfer_log.serviceChargeAmount = item.get_float("serviceChargeAmount")
             transfer_log.tranId = item.get_int("tranId")
             transfer_log.transferedAmount = item.get_float("transferedAmount")

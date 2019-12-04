@@ -1,6 +1,3 @@
-from binance.impl.utils.timeservice import convert_cst_in_millisecond_to_utc
-
-
 class Asset:
 
     def __init__(self):
@@ -53,7 +50,7 @@ class SubAccountFuturesDetail:
         sub_account_futures_detail.totalUnrealizedProfit = json_data.get_float("totalUnrealizedProfit")
         sub_account_futures_detail.totalWalletBalance = json_data.get_float("totalWalletBalance")
         sub_account_futures_detail.asset = json_data.get_string("asset")
-        sub_account_futures_detail.updateTime = convert_cst_in_millisecond_to_utc(json_data.get_int("updateTime"))
+        sub_account_futures_detail.updateTime = json_data.get_int("updateTime")
         
         list_array = json_data.get_array("assets")
         asset_list = list()

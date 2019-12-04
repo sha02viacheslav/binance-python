@@ -1,6 +1,3 @@
-from binance.impl.utils.timeservice import convert_cst_in_millisecond_to_utc
-
-
 class SubAccountStatus:
 
     def __init__(self):
@@ -18,7 +15,7 @@ class SubAccountStatus:
         sub_account_status.email = json_data.get_string("email")
         sub_account_status.isSubUserEnabled = json_data.get_string("isSubUserEnabled")
         sub_account_status.isUserActive = json_data.get_boolean("isUserActive")
-        sub_account_status.insertTime = convert_cst_in_millisecond_to_utc(json_data.get_int("insertTime"))
+        sub_account_status.insertTime = json_data.get_int("insertTime")
         sub_account_status.isMarginEnabled = json_data.get_string("isMarginEnabled")
         sub_account_status.isFutureEnabled = json_data.get_string("isFutureEnabled")
         sub_account_status.mobile = json_data.get_int("mobile")

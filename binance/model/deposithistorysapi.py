@@ -1,6 +1,3 @@
-from binance.impl.utils.timeservice import convert_cst_in_millisecond_to_utc
-
-
 class DepositHistorySapi:
 
     def __init__(self):
@@ -20,7 +17,7 @@ class DepositHistorySapi:
         deposit_history.addressTag = json_data.get_string("addressTag")
         deposit_history.amount = json_data.get_float("amount")
         deposit_history.coin = json_data.get_string("coin")
-        deposit_history.insertTime = convert_cst_in_millisecond_to_utc(json_data.get_int("insertTime"))
+        deposit_history.insertTime = json_data.get_int("insertTime")
         deposit_history.network = json_data.get_string("network")
         deposit_history.status = json_data.get_int("status")
         deposit_history.txId = json_data.get_string("txId")

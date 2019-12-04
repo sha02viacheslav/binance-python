@@ -1,6 +1,3 @@
-from binance.impl.utils.timeservice import convert_cst_in_millisecond_to_utc
-
-
 class AggregateTrade:
 
     def __init__(self):
@@ -21,7 +18,7 @@ class AggregateTrade:
         trade.qty = json_data.get_float("q")
         trade.firstId = json_data.get_int("f")
         trade.lastId = json_data.get_int("l")
-        trade.time = convert_cst_in_millisecond_to_utc(json_data.get_int("T"))
+        trade.time = json_data.get_int("T")
         trade.isBuyerMaker = json_data.get_boolean("m")
         trade.isBestMatch = json_data.get_boolean("M")
         
