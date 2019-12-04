@@ -700,4 +700,26 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
       
+    def aggregate_trades_list(self, symbol, fromId, startTime, endTime, limit):
+        check_should_not_none(symbol, "symbol")
+        builder = UrlParamsBuilder()
+        builder.put_url("symbol", symbol)
+        builder.put_url("fromId", fromId)
+        builder.put_url("startTime", startTime)
+        builder.put_url("endTime", endTime)
+        builder.put_url("limit", limit)
+
+        request = self.__create_request_by_get_with_apikey("/api/v3/aggTrades", builder)
+
+        def parse(json_wrapper):
+            aggregate_trades_list = list()
+            data_list = json_wrapper.convert_2_array()
+            for item in data_list.get_items():
+                trade = AggregateTrade.json_parse(item)
+                aggregate_trades_list.append(trade)
+            return aggregate_trades_list
+
+        request.json_parser = parse
+        return request
+      
         

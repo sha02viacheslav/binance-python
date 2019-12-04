@@ -378,3 +378,15 @@ class RequestClient(object):
         Get older market trades.
         """
         return call_sync(self.request_impl.old_trade_lookup(symbol, limit, fromId))
+           
+    def aggregate_trades_list(self, symbol: 'str', fromId: 'long' = None, 
+                            startTime: 'long' = None, endTime: 'long' = None, limit: 'int' = None) -> any:
+        """
+        Compressed/Aggregate Trades List
+
+        GET /api/v3/aggTrades
+
+        Get compressed, aggregate trades. Trades that fill at the time, from the same order, 
+        with the same price will have the quantity aggregated.
+        """
+        return call_sync(self.request_impl.aggregate_trades_list(symbol, fromId, startTime, endTime, limit))
