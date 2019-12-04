@@ -68,7 +68,7 @@ class RestApiRequestImpl(object):
         print("=====================")
         return request
 
-    def system_status(self):
+    def get_system_status(self):
         builder = UrlParamsBuilder()
         request = self.__create_request_by_get("/wapi/v3/systemStatus.html", builder)
 
@@ -81,7 +81,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
 
-    def all_coins_information(self):
+    def get_all_coins_information(self):
         builder = UrlParamsBuilder()
         request = self.__create_request_by_get_with_signature("/sapi/v1/capital/config/getall", builder)
 
@@ -96,7 +96,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
         
-    def withdraw_sapi(self, coin, address, amount, network, addressTag, name):
+    def post_withdraw_sapi(self, coin, address, amount, network, addressTag, name):
         check_should_not_none(coin, "coin")
         check_should_not_none(address, "address")
         check_should_not_none(amount, "amount")
@@ -116,7 +116,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
         
-    def withdraw(self, asset, address, amount, network, addressTag, name):
+    def post_withdraw(self, asset, address, amount, network, addressTag, name):
         check_should_not_none(asset, "asset")
         check_should_not_none(address, "address")
         check_should_not_none(amount, "amount")
@@ -136,7 +136,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
 
-    def deposit_history_sapi(self, coin, status, startTime, endTime, offest):
+    def get_deposit_history_sapi(self, coin, status, startTime, endTime, offest):
         builder = UrlParamsBuilder()
         builder.put_url("coin", coin)
         builder.put_url("status", status)
@@ -159,7 +159,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
 
-    def deposit_history(self, asset, status, startTime, endTime):
+    def get_deposit_history(self, asset, status, startTime, endTime):
         builder = UrlParamsBuilder()
         builder.put_url("asset", asset)
         builder.put_url("status", status)
@@ -180,7 +180,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
    
-    def withdraw_history_sapi(self, coin, status, offest, limit, startTime, endTime):
+    def get_withdraw_history_sapi(self, coin, status, offest, limit, startTime, endTime):
         builder = UrlParamsBuilder()
         builder.put_url("coin", coin)
         builder.put_url("status", status)
@@ -203,7 +203,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
 
-    def withdraw_history(self, asset, status, startTime, endTime):
+    def get_withdraw_history(self, asset, status, startTime, endTime):
         builder = UrlParamsBuilder()
         builder.put_url("asset", asset)
         builder.put_url("status", status)
@@ -223,7 +223,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
 
-    def deposit_address_sapi(self, coin, network):
+    def get_deposit_address_sapi(self, coin, network):
         check_should_not_none(coin, "coin")
         builder = UrlParamsBuilder()
         builder.put_url("coin", coin)
@@ -238,7 +238,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
 
-    def deposit_address(self, asset, status):
+    def get_deposit_address(self, asset, status):
         check_should_not_none(asset, "asset")
         builder = UrlParamsBuilder()
         builder.put_url("asset", asset)
@@ -253,7 +253,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
 
-    def account_status(self):
+    def get_account_status(self):
         builder = UrlParamsBuilder()
 
         request = self.__create_request_by_get_with_signature("/wapi/v3/accountStatus.html", builder)
@@ -268,7 +268,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
 
-    def account_api_trading_status(self):
+    def get_account_api_trading_status(self):
         builder = UrlParamsBuilder()
 
         request = self.__create_request_by_get_with_signature("/wapi/v3/apiTradingStatus.html", builder)
@@ -280,7 +280,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
 
-    def dust_log(self):
+    def get_dust_log(self):
         builder = UrlParamsBuilder()
 
         request = self.__create_request_by_get_with_signature("/wapi/v3/userAssetDribbletLog.html", builder)
@@ -292,7 +292,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
 
-    def trade_fee(self, symbol):
+    def get_trade_fee(self, symbol):
         builder = UrlParamsBuilder()
         builder.put_url("symbol", symbol)
 
@@ -309,7 +309,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
 
-    def asset_detail(self):
+    def get_asset_detail(self):
         builder = UrlParamsBuilder()
 
         request = self.__create_request_by_get_with_signature("/wapi/v3/assetDetail.html", builder)
@@ -332,7 +332,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
 
-    def sub_account_list(self, email, status, page, limit):
+    def get_sub_account_list(self, email, status, page, limit):
         check_should_not_none(email, "email")
         builder = UrlParamsBuilder()
         builder.put_url("email", email)
@@ -353,7 +353,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
 
-    def sub_account_transfer_history(self, email, startTime, endTime, page, limit):
+    def get_sub_account_transfer_history(self, email, startTime, endTime, page, limit):
         check_should_not_none(email, "email")
         builder = UrlParamsBuilder()
         builder.put_url("email", email)
@@ -375,7 +375,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
 
-    def sub_account_transfer(self, fromEmail, toEmail, asset, amount):
+    def post_sub_account_transfer(self, fromEmail, toEmail, asset, amount):
         check_should_not_none(fromEmail, "fromEmail")
         check_should_not_none(toEmail, "toEmail")
         check_should_not_none(asset, "asset")
@@ -395,7 +395,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
 
-    def sub_account_assets(self, email, symbol):
+    def get_sub_account_assets(self, email, symbol):
         check_should_not_none(email, "email")
         builder = UrlParamsBuilder()
         builder.put_url("email", email)
@@ -415,7 +415,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
 
-    def sub_account_deposit_address(self, email, coin, network):
+    def get_sub_account_deposit_address(self, email, coin, network):
         check_should_not_none(email, "email")
         check_should_not_none(coin, "coin")
         builder = UrlParamsBuilder()
@@ -434,7 +434,7 @@ class RestApiRequestImpl(object):
         return request
 
         
-    def sub_account_deposit_history(self, email, coin, status, startTime, endTime, offest):
+    def get_sub_account_deposit_history(self, email, coin, status, startTime, endTime, offest):
         check_should_not_none(email, "email")
         builder = UrlParamsBuilder()
         builder.put_url("email", email)
@@ -458,7 +458,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
         
-    def sub_account_status(self, email):
+    def get_sub_account_status(self, email):
         builder = UrlParamsBuilder()
         builder.put_url("email", email)
 
@@ -475,7 +475,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
         
-    def sub_account_enable_margin(self, email):
+    def post_sub_account_enable_margin(self, email):
         check_should_not_none(email, "email")
         builder = UrlParamsBuilder()
         builder.put_url("email", email)
@@ -493,7 +493,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
         
-    def sub_account_margin_detail(self, email):
+    def get_sub_account_margin_detail(self, email):
         check_should_not_none(email, "email")
         builder = UrlParamsBuilder()
         builder.put_url("email", email)
@@ -507,7 +507,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
         
-    def sub_account_margin_summary(self):
+    def get_sub_account_margin_summary(self):
         builder = UrlParamsBuilder()
 
         request = self.__create_request_by_get_with_signature("/sapi/v1/sub-account/margin/accountSummary", builder)
@@ -519,7 +519,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
       
-    def sub_account_enable_futures(self, email):
+    def post_sub_account_enable_futures(self, email):
         check_should_not_none(email, "email")
         builder = UrlParamsBuilder()
         builder.put_url("email", email)
@@ -537,7 +537,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
                 
-    def sub_account_futures_detail(self, email):
+    def get_sub_account_futures_detail(self, email):
         check_should_not_none(email, "email")
         builder = UrlParamsBuilder()
         builder.put_url("email", email)
@@ -551,7 +551,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
                 
-    def sub_account_futures_summary(self):
+    def get_sub_account_futures_summary(self):
         builder = UrlParamsBuilder()
 
         request = self.__create_request_by_get_with_signature("/sapi/v1/sub-account/futures/accountSummary", builder)
@@ -563,7 +563,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
                 
-    def sub_account_futures_positionrisk(self, email):
+    def get_sub_account_futures_positionrisk(self, email):
         check_should_not_none(email, "email")
         builder = UrlParamsBuilder()
         builder.put_url("email", email)
@@ -581,7 +581,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
 
-    def dust_transfer(self, asset):
+    def post_dust_transfer(self, asset):
         check_should_not_none(asset, "asset")
         query_string = "recvWindow=60000"
         query_string += "&timestamp=" + str(get_current_timestamp())
@@ -609,7 +609,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
 
-    def asset_dividend_record(self, asset, startTime, endTime):
+    def get_asset_dividend_record(self, asset, startTime, endTime):
         builder = UrlParamsBuilder()
         builder.put_url("asset", asset)
         builder.put_url("startTime", startTime)
@@ -624,7 +624,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
         
-    def check_servertime(self):
+    def get_servertime(self):
         builder = UrlParamsBuilder()
         request = self.__create_request_by_get("/api/v3/time", builder)
 
@@ -635,7 +635,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
         
-    def exchange_information(self):
+    def get_exchange_information(self):
         builder = UrlParamsBuilder()
         request = self.__create_request_by_get("/api/v3/exchangeInfo", builder)
 
@@ -646,7 +646,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
             
-    def order_book(self, symbol, limit):
+    def get_order_book(self, symbol, limit):
         check_should_not_none(symbol, "symbol")
         builder = UrlParamsBuilder()
         builder.put_url("symbol", symbol)
@@ -661,7 +661,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
       
-    def recent_trades_list(self, symbol, limit):
+    def get_recent_trades_list(self, symbol, limit):
         check_should_not_none(symbol, "symbol")
         builder = UrlParamsBuilder()
         builder.put_url("symbol", symbol)
@@ -680,7 +680,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
       
-    def old_trade_lookup(self, symbol, limit, fromId):
+    def get_old_trade_lookup(self, symbol, limit, fromId):
         check_should_not_none(symbol, "symbol")
         builder = UrlParamsBuilder()
         builder.put_url("symbol", symbol)
@@ -700,7 +700,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
       
-    def aggregate_trades_list(self, symbol, fromId, startTime, endTime, limit):
+    def get_aggregate_trades_list(self, symbol, fromId, startTime, endTime, limit):
         check_should_not_none(symbol, "symbol")
         builder = UrlParamsBuilder()
         builder.put_url("symbol", symbol)
@@ -722,7 +722,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
       
-    def candlestick_data(self, symbol, interval, startTime, endTime, limit):
+    def get_candlestick_data(self, symbol, interval, startTime, endTime, limit):
         check_should_not_none(symbol, "symbol")
         check_should_not_none(symbol, "interval")
         builder = UrlParamsBuilder()
@@ -745,7 +745,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
       
-    def current_average_price(self, symbol):
+    def get_current_average_price(self, symbol):
         check_should_not_none(symbol, "symbol")
         builder = UrlParamsBuilder()
         builder.put_url("symbol", symbol)
@@ -760,7 +760,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
       
-    def ticker_price_change_statistics(self, symbol):
+    def get_ticker_price_change_statistics(self, symbol):
         builder = UrlParamsBuilder()
         builder.put_url("symbol", symbol)
 
@@ -783,7 +783,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
       
-    def symbol_price_ticker(self, symbol):
+    def get_symbol_price_ticker(self, symbol):
         builder = UrlParamsBuilder()
         builder.put_url("symbol", symbol)
 
@@ -806,7 +806,7 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
       
-    def symbol_orderbook_ticker(self, symbol):
+    def get_symbol_orderbook_ticker(self, symbol):
         builder = UrlParamsBuilder()
         builder.put_url("symbol", symbol)
 
