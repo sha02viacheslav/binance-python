@@ -413,3 +413,13 @@ class RequestClient(object):
         Current average price for a symbol.
         """
         return call_sync(self.request_impl.current_average_price(symbol))
+           
+    def ticker_price_change_statistics(self, symbol: 'str' = None) -> any:
+        """
+        24hr Ticker Price Change Statistics
+
+        GET /api/v3/ticker/24hr
+
+        24 hour rolling window price change statistics. Careful when accessing this with no symbol.
+        """
+        return call_sync(self.request_impl.ticker_price_change_statistics(symbol))

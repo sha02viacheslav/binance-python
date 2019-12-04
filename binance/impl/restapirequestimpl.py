@@ -760,4 +760,27 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
       
+    def ticker_price_change_statistics(self, symbol):
+        builder = UrlParamsBuilder()
+        builder.put_url("symbol", symbol)
+
+        request = self.__create_request_by_get("/api/v3/ticker/24hr", builder)
+
+        def parse(json_wrapper):
+            ticker_price_change_statistics = list()
+
+            if symbol:
+                information = TickerPriceChangeStatistics.json_parse(json_wrapper)
+                ticker_price_change_statistics.append(information)
+            else:
+                data_list = json_wrapper.convert_2_array()
+                for item in data_list.get_items():
+                    information = TickerPriceChangeStatistics.json_parse(item)
+                    ticker_price_change_statistics.append(information)
+
+            return ticker_price_change_statistics
+
+        request.json_parser = parse
+        return request
+      
         
