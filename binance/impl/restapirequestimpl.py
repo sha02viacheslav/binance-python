@@ -709,7 +709,7 @@ class RestApiRequestImpl(object):
         builder.put_url("endTime", endTime)
         builder.put_url("limit", limit)
 
-        request = self.__create_request_by_get_with_apikey("/api/v3/aggTrades", builder)
+        request = self.__create_request_by_get("/api/v3/aggTrades", builder)
 
         def parse(json_wrapper):
             aggregate_trades_list = list()
@@ -732,7 +732,7 @@ class RestApiRequestImpl(object):
         builder.put_url("endTime", endTime)
         builder.put_url("limit", limit)
 
-        request = self.__create_request_by_get_with_apikey("/api/v3/klines", builder)
+        request = self.__create_request_by_get("/api/v3/klines", builder)
 
         def parse(json_wrapper):
             candlestick_list = list()
@@ -750,7 +750,7 @@ class RestApiRequestImpl(object):
         builder = UrlParamsBuilder()
         builder.put_url("symbol", symbol)
 
-        request = self.__create_request_by_get_with_apikey("/api/v3/avgPrice", builder)
+        request = self.__create_request_by_get("/api/v3/avgPrice", builder)
 
         def parse(json_wrapper):
             current_average_price = AveragePrice.json_parse(json_wrapper)
