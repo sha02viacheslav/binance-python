@@ -32,3 +32,4 @@ from binance.model.aggregatetrade import AggregateTrade
 from binance.model.candlestick import Candlestick
 from binance.model.averageprice import AveragePrice
 from binance.model.tickerpricechangestatistics import TickerPriceChangeStatistics
+from binance.model.symbolprice import SymbolPrice

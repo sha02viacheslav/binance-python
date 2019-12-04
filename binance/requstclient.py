@@ -423,3 +423,13 @@ class RequestClient(object):
         24 hour rolling window price change statistics. Careful when accessing this with no symbol.
         """
         return call_sync(self.request_impl.ticker_price_change_statistics(symbol))
+           
+    def symbol_price_ticker(self, symbol: 'str' = None) -> any:
+        """
+        Symbol Price Ticker
+
+        GET /api/v3/ticker/price
+
+        Latest price for a symbol or symbols.
+        """
+        return call_sync(self.request_impl.symbol_price_ticker(symbol))

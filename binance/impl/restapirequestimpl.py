@@ -783,4 +783,27 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
       
+    def symbol_price_ticker(self, symbol):
+        builder = UrlParamsBuilder()
+        builder.put_url("symbol", symbol)
+
+        request = self.__create_request_by_get("/api/v3/ticker/price", builder)
+
+        def parse(json_wrapper):
+            symbol_price_list = list()
+
+            if symbol:
+                information = SymbolPrice.json_parse(json_wrapper)
+                symbol_price_list.append(information)
+            else:
+                data_list = json_wrapper.convert_2_array()
+                for item in data_list.get_items():
+                    information = SymbolPrice.json_parse(item)
+                    symbol_price_list.append(information)
+
+            return symbol_price_list
+
+        request.json_parser = parse
+        return request
+      
         
