@@ -1,6 +1,7 @@
 from binance.constant.system import RestApiDefine
 from binance.impl.restapirequestimpl import RestApiRequestImpl
 from binance.impl.restapiinvoker import call_sync
+from binance.model.constant import *
 
 
 class RequestClient(object):
@@ -390,3 +391,15 @@ class RequestClient(object):
         with the same price will have the quantity aggregated.
         """
         return call_sync(self.request_impl.aggregate_trades_list(symbol, fromId, startTime, endTime, limit))
+           
+    def candlestick_data(self, symbol: 'str', interval: 'CandlestickInterval', 
+                            startTime: 'long' = None, endTime: 'long' = None, limit: 'int' = None) -> any:
+        """
+        Kline/Candlestick Data
+
+        GET /api/v3/klines
+
+        Kline/candlestick bars for a symbol.
+        Klines are uniquely identified by their open time.
+        """
+        return call_sync(self.request_impl.candlestick_data(symbol, interval, startTime, endTime, limit))

@@ -722,4 +722,27 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
       
+    def candlestick_data(self, symbol, interval, startTime, endTime, limit):
+        check_should_not_none(symbol, "symbol")
+        check_should_not_none(symbol, "interval")
+        builder = UrlParamsBuilder()
+        builder.put_url("symbol", symbol)
+        builder.put_url("interval", interval)
+        builder.put_url("startTime", startTime)
+        builder.put_url("endTime", endTime)
+        builder.put_url("limit", limit)
+
+        request = self.__create_request_by_get_with_apikey("/api/v3/klines", builder)
+
+        def parse(json_wrapper):
+            candlestick_list = list()
+            data_list = json_wrapper.convert_2_array()
+            for item in data_list.get_items():
+                candlestick = Candlestick.json_parse(item)
+                candlestick_list.append(candlestick)
+            return candlestick_list
+
+        request.json_parser = parse
+        return request
+      
         

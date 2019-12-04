@@ -1,3 +1,4 @@
+from binance.model.constant import *
 from binance.model.systemstatus import SystemStatus
 from binance.model.network import Network
 from binance.model.coininformation import CoinInformation
@@ -28,3 +29,4 @@ from binance.model.exchangeinformation import ExchangeInformation
 from binance.model.orderbook import OrderBook
 from binance.model.trade import Trade
 from binance.model.aggregatetrade import AggregateTrade
+from binance.model.candlestick import Candlestick
