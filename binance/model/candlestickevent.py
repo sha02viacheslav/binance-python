@@ -1,6 +1,3 @@
-from huobi.impl.utils.timeservice import convert_cst_in_second_to_utc
-
-
 class Candlestick:
 
     def __init__(self):
