@@ -157,6 +157,17 @@ class SubscriptionClient(object):
         """
         request = self.websocket_request_impl.subscribe_all_bookticker_event(callback, error_handler)
         self.__create_connection(request)
+           
+    def subscribe_book_depth_event(self, symbol: 'str', limit: 'int', callback, error_handler=None):
+        """
+        Partial Book Depth Streams
+
+        Top bids and asks, Valid are 5, 10, or 20.
+
+        Stream Names: <symbol>@depth<levels> OR <symbol>@depth<levels>@100ms.
+        """
+        request = self.websocket_request_impl.subscribe_book_depth_event(symbol, limit, callback, error_handler)
+        self.__create_connection(request)
 
     def unsubscribe_all(self):
         for conn in self.connections:

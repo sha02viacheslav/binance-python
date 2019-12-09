@@ -74,3 +74,11 @@ def all_bookticker_channel():
     channel["id"] = get_current_timestamp()
     channel["method"] = "SUBSCRIBE"
     return json.dumps(channel)
+
+def book_depth_channel(symbol, limit):
+    channel = dict()
+    channel["params"] = list()
+    channel["params"].append(symbol + "@depth" + str(limit))
+    channel["id"] = get_current_timestamp()
+    channel["method"] = "SUBSCRIBE"
+    return json.dumps(channel)
