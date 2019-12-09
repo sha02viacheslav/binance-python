@@ -81,6 +81,18 @@ class SubscriptionClient(object):
         request = self.websocket_request_impl.subscribe_aggregate_trade_event(symbol, callback, error_handler)
         self.__create_connection(request)
 
+        
+    def subscribe_trade_event(self, symbol: 'str', callback, error_handler=None):
+        """
+        Trade Streams
+
+        The Trade Streams push raw trade information; each trade has a unique buyer and seller.
+
+        Stream Name: <symbol>@trade
+        """
+        request = self.websocket_request_impl.subscribe_trade_event(symbol, callback, error_handler)
+        self.__create_connection(request)
+
     def unsubscribe_all(self):
         for conn in self.connections:
             conn.close()
