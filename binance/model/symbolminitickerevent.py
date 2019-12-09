@@ -13,14 +13,14 @@ class SymbolMiniTickerEvent:
 
     @staticmethod
     def json_parse(json_wrapper):
-        trade_event = SymbolMiniTickerEvent()
-        trade_event.eventType = json_wrapper.get_string("e")
-        trade_event.eventTime = json_wrapper.get_int("E")
-        trade_event.symbol = json_wrapper.get_string("s")
-        trade_event.open = json_wrapper.get_float("o")
-        trade_event.close = json_wrapper.get_float("c")
-        trade_event.high = json_wrapper.get_float("h")
-        trade_event.low = json_wrapper.get_float("l")
-        trade_event.totalTradedBaseAssetVolume = json_wrapper.get_float("v")
-        trade_event.totalTradedQuoteAssetVolume = json_wrapper.get_float("q")
-        return trade_event
+        symbol_miniticker_event = SymbolMiniTickerEvent()
+        symbol_miniticker_event.eventType = json_wrapper.get_string("e")
+        symbol_miniticker_event.eventTime = json_wrapper.get_int("E")
+        symbol_miniticker_event.symbol = json_wrapper.get_string("s")
+        symbol_miniticker_event.open = json_wrapper.get_float("o")
+        symbol_miniticker_event.close = json_wrapper.get_float("c")
+        symbol_miniticker_event.high = json_wrapper.get_float("h")
+        symbol_miniticker_event.low = json_wrapper.get_float("l")
+        symbol_miniticker_event.totalTradedBaseAssetVolume = json_wrapper.get_float("v")
+        symbol_miniticker_event.totalTradedQuoteAssetVolume = json_wrapper.get_float("q")
+        return symbol_miniticker_event
