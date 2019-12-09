@@ -34,3 +34,11 @@ def symbol_miniticker_channel(symbol):
     channel["id"] = get_current_timestamp()
     channel["method"] = "SUBSCRIBE"
     return json.dumps(channel)
+
+def all_miniticker_channel():
+    channel = dict()
+    channel["params"] = list()
+    channel["params"].append("!miniTicker@arr")
+    channel["id"] = get_current_timestamp()
+    channel["method"] = "SUBSCRIBE"
+    return json.dumps(channel)
