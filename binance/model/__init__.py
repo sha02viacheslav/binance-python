@@ -37,3 +37,4 @@ from binance.model.symbolorderbook import SymbolOrderbook
 from binance.model.candlestickevent import CandlestickEvent
 from binance.model.aggregatetradeevent import AggregateTradeEvent
 from binance.model.tradeevent import TradeEvent
+from binance.model.symbolminitickerevent import SymbolMiniTickerEvent

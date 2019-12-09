@@ -26,3 +26,11 @@ def trade_channel(symbol):
     channel["id"] = get_current_timestamp()
     channel["method"] = "SUBSCRIBE"
     return json.dumps(channel)
+
+def symbol_miniticker_channel(symbol):
+    channel = dict()
+    channel["params"] = list()
+    channel["params"].append(symbol + "@miniTicker")
+    channel["id"] = get_current_timestamp()
+    channel["method"] = "SUBSCRIBE"
+    return json.dumps(channel)

@@ -80,7 +80,6 @@ class SubscriptionClient(object):
         """
         request = self.websocket_request_impl.subscribe_aggregate_trade_event(symbol, callback, error_handler)
         self.__create_connection(request)
-
         
     def subscribe_trade_event(self, symbol: 'str', callback, error_handler=None):
         """
@@ -91,6 +90,17 @@ class SubscriptionClient(object):
         Stream Name: <symbol>@trade
         """
         request = self.websocket_request_impl.subscribe_trade_event(symbol, callback, error_handler)
+        self.__create_connection(request)
+        
+    def subscribe_symbol_miniticker_event(self, symbol: 'str', callback, error_handler=None):
+        """
+        Individual Symbol Mini Ticker Stream
+
+        24hr rolling window mini-ticker statistics. These are NOT the statistics of the UTC day, but a 24hr rolling window for the previous 24hrs.
+
+        Stream Name: <symbol>@miniTicker
+        """
+        request = self.websocket_request_impl.subscribe_symbol_miniticker_event(symbol, callback, error_handler)
         self.__create_connection(request)
 
     def unsubscribe_all(self):
