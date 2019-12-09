@@ -443,3 +443,18 @@ class RequestClient(object):
         Best price/qty on the order book for a symbol or symbols.
         """
         return call_sync(self.request_impl.get_symbol_orderbook_ticker(symbol))
+
+    def post_order(self, symbol: 'str', side: 'OrderSide', ordertype: 'OrderType', 
+                timeInForce: 'TimeInForce' = TimeInForce.INVALID, quantity: 'float' = None,
+                quoteOrderQty: 'float' = None, price: 'float' = None,
+                newClientOrderId: 'str' = None, stopPrice: 'float' = None, icebergQty: 'float' = None,
+                newOrderRespType: 'OrderRespType' = OrderRespType.INVALID) -> any:
+        """
+        New Order (TRADE)
+
+        POST /api/v3/order (HMAC SHA256)
+
+        Send in a new order.
+        """
+        return call_sync(self.request_impl.post_order(symbol, side, ordertype, 
+                timeInForce, quantity,quoteOrderQty, price, newClientOrderId, stopPrice, icebergQty, newOrderRespType))

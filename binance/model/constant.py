@@ -23,6 +23,13 @@ class OrderSide:
     INVALID = None
 
 
+class TimeInForce:
+    GTC = "GTC"
+    IOC = "IOC"
+    FOK = "FOK"
+    INVALID = None
+
+
 class TradeDirection:
     BUY = "buy"
     SELL = "sell"
@@ -37,6 +44,12 @@ class OrderType:
     TAKE_PROFIT = "TAKE_PROFIT"
     TAKE_PROFIT_LIMIT = "TAKE_PROFIT_LIMIT"
     LIMIT_MAKER = "LIMIT_MAKER"
+    INVALID = None
+
+class OrderRespType:
+    ACK = "ACK"
+    RESULT = "RESULT"
+    FULL = "FULL"
     INVALID = None
     
 

@@ -38,7 +38,7 @@ class RestApiRequestImpl(object):
         request.method = "POST"
         request.host = self.__server_url
         builder.put_url("recvWindow", 60000)
-        builder.put_url("timestamp", str(get_current_timestamp()))
+        builder.put_url("timestamp", str(get_current_timestamp() - 1000))
         create_signature(self.__secret_key, builder)
         request.header.update({'Content-Type': 'application/json'})
         request.header.update({"X-MBX-APIKEY": self.__api_key})
@@ -56,7 +56,7 @@ class RestApiRequestImpl(object):
         request.method = "GET"
         request.host = self.__server_url
         builder.put_url("recvWindow", 60000)
-        builder.put_url("timestamp", str(get_current_timestamp()))
+        builder.put_url("timestamp", str(get_current_timestamp() - 1000))
         create_signature(self.__secret_key, builder)
         request.header.update({"Content-Type": "application/x-www-form-urlencoded"})
         request.header.update({"X-MBX-APIKEY": self.__api_key})
@@ -825,6 +825,33 @@ class RestApiRequestImpl(object):
                     symbol_orderbook_list.append(information)
 
             return symbol_orderbook_list
+
+        request.json_parser = parse
+        return request
+      
+    def post_order(self, symbol, side, ordertype, 
+                timeInForce, quantity, quoteOrderQty, price, newClientOrderId, stopPrice, icebergQty, newOrderRespType):
+        check_should_not_none(symbol, "symbol")
+        check_should_not_none(side, "side")
+        check_should_not_none(ordertype, "ordertype")
+        builder = UrlParamsBuilder()
+        builder.put_url("symbol", symbol)
+        builder.put_url("side", side)
+        builder.put_url("type", ordertype)
+        builder.put_url("timeInForce", timeInForce)
+        builder.put_url("quantity", quantity)
+        builder.put_url("quoteOrderQty", quoteOrderQty)
+        builder.put_url("price", price)
+        builder.put_url("newClientOrderId", newClientOrderId)
+        builder.put_url("stopPrice", stopPrice)
+        builder.put_url("icebergQty", icebergQty)
+        builder.put_url("newOrderRespType", newOrderRespType)
+
+        request = self.__create_request_by_post_with_signature("/api/v3/order", builder)
+
+        def parse(json_wrapper):
+            information = Order.json_parse(json_wrapper)
+            return information
 
         request.json_parser = parse
         return request
