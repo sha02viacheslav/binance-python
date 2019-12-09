@@ -82,3 +82,11 @@ def book_depth_channel(symbol, limit):
     channel["id"] = get_current_timestamp()
     channel["method"] = "SUBSCRIBE"
     return json.dumps(channel)
+
+def diff_depth_channel(symbol):
+    channel = dict()
+    channel["params"] = list()
+    channel["params"].append(symbol + "@depth")
+    channel["id"] = get_current_timestamp()
+    channel["method"] = "SUBSCRIBE"
+    return json.dumps(channel)

@@ -168,6 +168,17 @@ class SubscriptionClient(object):
         """
         request = self.websocket_request_impl.subscribe_book_depth_event(symbol, limit, callback, error_handler)
         self.__create_connection(request)
+           
+    def subscribe_diff_depth_event(self, symbol: 'str', callback, error_handler=None):
+        """
+        Diff. Depth Stream
+
+        Order book price and quantity depth updates used to locally manage an order book.
+
+        Stream Name: <symbol>@depth OR <symbol>@depth@100ms
+        """
+        request = self.websocket_request_impl.subscribe_diff_depth_event(symbol, callback, error_handler)
+        self.__create_connection(request)
 
     def unsubscribe_all(self):
         for conn in self.connections:
