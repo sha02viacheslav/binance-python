@@ -35,4 +35,10 @@ def call_sync(request):
         print(response.text)
         check_response(json_wrapper)
         return request.json_parser(json_wrapper)
+    elif request.method == "DELETE":
+        response = requests.delete(request.host + request.url, headers=request.header)
+        json_wrapper = parse_json_from_string(response.text)
+        print(response.text)
+        check_response(json_wrapper)
+        return request.json_parser(json_wrapper)
 

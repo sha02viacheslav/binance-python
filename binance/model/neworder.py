@@ -7,7 +7,7 @@ class Fill:
         self.commissionAsset = ""
         
 
-class Order:
+class NewOrder:
 
     def __init__(self):
         self.symbol = ""
@@ -27,7 +27,7 @@ class Order:
 
     @staticmethod
     def json_parse(json_data):
-        order = Order()
+        order = NewOrder()
         order.symbol = json_data.get_string("symbol")
         order.orderId = json_data.get_int("orderId")
         order.orderListId = json_data.get_int("orderListId")

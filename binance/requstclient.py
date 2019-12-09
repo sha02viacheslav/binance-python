@@ -458,3 +458,14 @@ class RequestClient(object):
         """
         return call_sync(self.request_impl.post_order(symbol, side, ordertype, 
                 timeInForce, quantity,quoteOrderQty, price, newClientOrderId, stopPrice, icebergQty, newOrderRespType))
+
+    def cancel_order(self, symbol: 'str', orderId: 'long' = None, origClientOrderId: 'str' = None, 
+                    newClientOrderId: 'str' = None) -> any:
+        """
+        Cancel Order (TRADE)
+
+        DELETE /api/v3/order (HMAC SHA256)
+
+        Cancel an active order.
+        """
+        return call_sync(self.request_impl.cancel_order(symbol, orderId, origClientOrderId, newClientOrderId))

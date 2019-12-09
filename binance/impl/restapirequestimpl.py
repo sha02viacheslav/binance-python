@@ -51,6 +51,23 @@ class RestApiRequestImpl(object):
         print("=====================")
         return request
 
+    def __create_request_by_delete_with_signature(self, url, builder):
+        request = RestApiRequest()
+        request.method = "DELETE"
+        request.host = self.__server_url
+        builder.put_url("recvWindow", 60000)
+        builder.put_url("timestamp", str(get_current_timestamp() - 1000))
+        create_signature(self.__secret_key, builder)
+        request.header.update({'Content-Type': 'application/json'})
+        request.header.update({"X-MBX-APIKEY": self.__api_key})
+        request.url = url + builder.build_url()
+        # For develop
+        print("====== Request ======")
+        print(request)
+        PrintMix.print_data(request)
+        print("=====================")
+        return request
+
     def __create_request_by_get_with_signature(self, url, builder):
         request = RestApiRequest()
         request.method = "GET"
@@ -850,7 +867,25 @@ class RestApiRequestImpl(object):
         request = self.__create_request_by_post_with_signature("/api/v3/order", builder)
 
         def parse(json_wrapper):
-            information = Order.json_parse(json_wrapper)
+            information = NewOrder.json_parse(json_wrapper)
+            return information
+
+        request.json_parser = parse
+        return request
+      
+      
+    def cancel_order(self, symbol, orderId, origClientOrderId, newClientOrderId):
+        check_should_not_none(symbol, "symbol")
+        builder = UrlParamsBuilder()
+        builder.put_url("symbol", symbol)
+        builder.put_url("orderId", orderId)
+        builder.put_url("origClientOrderId", origClientOrderId)
+        builder.put_url("newClientOrderId", newClientOrderId)
+
+        request = self.__create_request_by_delete_with_signature("/api/v3/order", builder)
+
+        def parse(json_wrapper):
+            information = CancelOrder.json_parse(json_wrapper)
             return information
 
         request.json_parser = parse

@@ -41,4 +41,5 @@ from binance.model.symbolminitickerevent import SymbolMiniTickerEvent
 from binance.model.symboltickerevent import SymbolTickerEvent
 from binance.model.symbolbooktickerevent import SymbolBookTickerEvent
 from binance.model.diffdepthevent import DiffDepthEvent
-from binance.model.order import Order
+from binance.model.neworder import NewOrder
+from binance.model.cancelorder import CancelOrder
