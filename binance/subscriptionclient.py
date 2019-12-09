@@ -124,7 +124,18 @@ class SubscriptionClient(object):
         """
         request = self.websocket_request_impl.subscribe_symbol_ticker_event(symbol, callback, error_handler)
         self.__create_connection(request)
+       
+    def subscribe_all_ticker_event(self, callback, error_handler=None):
+        """
+        All Market Tickers Stream
 
+        24hr rolling window ticker statistics for all symbols that changed in an array. These are NOT the statistics of the UTC day, but a 24hr rolling window for the previous 24hrs. Note that only tickers that have changed will be present in the array.
+
+        Stream Name: !ticker@arr
+        """
+        request = self.websocket_request_impl.subscribe_all_ticker_event(callback, error_handler)
+        self.__create_connection(request)
+ 
     def unsubscribe_all(self):
         for conn in self.connections:
             conn.close()

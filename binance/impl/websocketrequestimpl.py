@@ -138,3 +138,26 @@ class WebsocketRequestImpl(object):
         request.error_handler = error_handler
 
         return request
+    
+    def subscribe_all_ticker_event(self, callback, error_handler=None):
+        check_should_not_none(callback, "callback")
+
+        def subscription_handler(connection):
+            connection.send(all_ticker_channel())
+            time.sleep(0.01)
+
+        def json_parse(json_wrapper):
+            all_ticker_event_obj = list()
+            data_list = json_wrapper.convert_2_array()
+            for item in data_list.get_items():
+                ticker_event_obj = SymbolTickerEvent.json_parse(item)
+            all_ticker_event_obj.append(ticker_event_obj)
+            return all_ticker_event_obj
+
+        request = WebsocketRequest()
+        request.subscription_handler = subscription_handler
+        request.json_parser = json_parse
+        request.update_callback = callback
+        request.error_handler = error_handler
+
+        return request
