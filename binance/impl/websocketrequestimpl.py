@@ -161,3 +161,23 @@ class WebsocketRequestImpl(object):
         request.error_handler = error_handler
 
         return request
+      
+    def subscribe_symbol_bookticker_event(self, symbol, callback, error_handler=None):
+        check_should_not_none(symbol, "symbol")
+        check_should_not_none(callback, "callback")
+
+        def subscription_handler(connection):
+            connection.send(symbol_bookticker_channel(symbol))
+            time.sleep(0.01)
+
+        def json_parse(json_wrapper):
+            symbol_bookticker_event_obj = SymbolBookTickerEvent.json_parse(json_wrapper)
+            return symbol_bookticker_event_obj
+
+        request = WebsocketRequest()
+        request.subscription_handler = subscription_handler
+        request.json_parser = json_parse
+        request.update_callback = callback
+        request.error_handler = error_handler
+
+        return request

@@ -39,3 +39,4 @@ from binance.model.aggregatetradeevent import AggregateTradeEvent
 from binance.model.tradeevent import TradeEvent
 from binance.model.symbolminitickerevent import SymbolMiniTickerEvent
 from binance.model.symboltickerevent import SymbolTickerEvent
+from binance.model.symbolbooktickerevent import SymbolBookTickerEvent
