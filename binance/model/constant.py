@@ -18,8 +18,8 @@ class CandlestickInterval:
 
 
 class OrderSide:
-    BUY = "buy"
-    SELL = "sell"
+    BUY = "BUY"
+    SELL = "SELL"
     INVALID = None
 
 
@@ -30,18 +30,15 @@ class TradeDirection:
 
 
 class OrderType:
-    SELL_LIMIT = "sell-limit"
-    BUY_LIMIT = "buy-limit"
-    BUY_MARKET = "buy-market"
-    SELL_MARKET = "sell-market"
-    BUY_IOC = "buy-ioc"
-    SELL_IOC = "sell-ioc"
-    BUY_LIMIT_MAKER = "buy-limit-maker"
-    SELL_LIMIT_MAKER = "sell-limit-maker"
-    BUY_STOP_LIMIT = "buy-stop-limit"
-    SELL_STOP_LIMIT = "sell-stop-limit"
+    LIMIT = "LIMIT"
+    MARKET = "MARKET"
+    STOP_LOSS = "STOP_LOSS"
+    STOP_LOSS_LIMIT = "STOP_LOSS_LIMIT"
+    TAKE_PROFIT = "TAKE_PROFIT"
+    TAKE_PROFIT_LIMIT = "TAKE_PROFIT_LIMIT"
+    LIMIT_MAKER = "LIMIT_MAKER"
     INVALID = None
-
+    
 
 class AccountType:
     SPOT = "spot"
