@@ -113,6 +113,17 @@ class SubscriptionClient(object):
         """
         request = self.websocket_request_impl.subscribe_all_miniticker_event(callback, error_handler)
         self.__create_connection(request)
+ 
+    def subscribe_symbol_ticker_event(self, symbol: 'str', callback, error_handler=None):
+        """
+        Individual Symbol Ticker Streams
+
+        24hr rollwing window ticker statistics for a single symbol. These are NOT the statistics of the UTC day, but a 24hr rolling window for the previous 24hrs.
+
+        Stream Name: <symbol>@ticker
+        """
+        request = self.websocket_request_impl.subscribe_symbol_ticker_event(symbol, callback, error_handler)
+        self.__create_connection(request)
 
     def unsubscribe_all(self):
         for conn in self.connections:
