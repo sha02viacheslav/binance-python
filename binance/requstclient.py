@@ -489,3 +489,14 @@ class RequestClient(object):
         Get all open orders on a symbol. Careful when accessing this with no symbol.
         """
         return call_sync(self.request_impl.get_open_orders(symbol))
+
+    def get_all_orders(self, symbol: 'str', orderId: 'long' = None, startTime: 'long' = None, 
+                        endTime: 'long' = None, limit: 'int' = None) -> any:
+        """
+        All Orders (USER_DATA)
+
+        GET /api/v3/allOrders (HMAC SHA256)
+
+        Get all account orders; active, canceled, or filled.
+        """
+        return call_sync(self.request_impl.get_all_orders(symbol, orderId, startTime, endTime, limit))

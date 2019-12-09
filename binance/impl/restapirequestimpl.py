@@ -923,4 +923,26 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
       
+    def get_all_orders(self, symbol, orderId, startTime, endTime, limit):
+        check_should_not_none(symbol, "symbol")
+        builder = UrlParamsBuilder()
+        builder.put_url("symbol", symbol)
+        builder.put_url("orderId", orderId)
+        builder.put_url("startTime", startTime)
+        builder.put_url("endTime", endTime)
+        builder.put_url("limit", limit)
+
+        request = self.__create_request_by_get_with_signature("/api/v3/allOrders", builder)
+
+        def parse(json_wrapper):
+            order_list = list()
+            data_list = json_wrapper.convert_2_array()
+            for item in data_list.get_items():
+                order = Order.json_parse(item)
+                order_list.append(order)
+            return order_list
+
+        request.json_parser = parse
+        return request
+      
         
