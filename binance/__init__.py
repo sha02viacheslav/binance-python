@@ -1,1 +1,2 @@
 from binance.requstclient import RequestClient
+from binance.subscriptionclient import SubscriptionClient

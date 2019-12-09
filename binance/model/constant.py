@@ -225,3 +225,7 @@ class InstrumentStatus:
     NORMAL = "normal"
     DELISTED = "delisted"
     INVALID = None
+
+class SubscribeMessageType:
+    RESPONSE = "response"
+    PAYLOAD = "payload"

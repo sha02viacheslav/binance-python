@@ -26,13 +26,13 @@ def call_sync(request):
     if request.method == "GET":
         response = requests.get(request.host + request.url, headers=request.header)
         json_wrapper = parse_json_from_string(response.text)
-        # print(response.text)
+        print(response.text)
         check_response(json_wrapper)
         return request.json_parser(json_wrapper)
     elif request.method == "POST":
         response = requests.post(request.host + request.url, data=json.dumps(request.post_body), headers=request.header)
         json_wrapper = parse_json_from_string(response.text)
-        # print(response.text)
+        print(response.text)
         check_response(json_wrapper)
         return request.json_parser(json_wrapper)
 

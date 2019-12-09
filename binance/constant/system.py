@@ -1,6 +1,6 @@
 
 class WebSocketDefine:
-    Uri = "wss://api.binance.com/"
+    Uri = "wss://stream.binance.com:9443"
 
 class RestApiDefine:
     Url = "https://api.binance.com"

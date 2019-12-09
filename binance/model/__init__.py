@@ -34,3 +34,4 @@ from binance.model.averageprice import AveragePrice
 from binance.model.tickerpricechangestatistics import TickerPriceChangeStatistics
 from binance.model.symbolprice import SymbolPrice
 from binance.model.symbolorderbook import SymbolOrderbook
+from binance.model.candlestickevent import CandlestickEvent
