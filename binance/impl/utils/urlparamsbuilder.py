@@ -12,6 +12,8 @@ class UrlParamsBuilder(object):
         if value is not None:
             if isinstance(value, list):
                 self.param_map[name] = value
+            elif isinstance(value, float):
+                self.param_map[name] = ('%.20f' % (value)).rstrip('0').rstrip('.')
             else:
                 self.param_map[name] = str(value)
 
