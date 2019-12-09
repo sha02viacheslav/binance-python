@@ -906,4 +906,21 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
       
+    def get_open_orders(self, symbol):
+        builder = UrlParamsBuilder()
+        builder.put_url("symbol", symbol)
+
+        request = self.__create_request_by_get_with_signature("/api/v3/openOrders", builder)
+
+        def parse(json_wrapper):
+            order_list = list()
+            data_list = json_wrapper.convert_2_array()
+            for item in data_list.get_items():
+                order = Order.json_parse(item)
+                order_list.append(order)
+            return order_list
+
+        request.json_parser = parse
+        return request
+      
         

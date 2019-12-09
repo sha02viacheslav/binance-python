@@ -479,3 +479,13 @@ class RequestClient(object):
         Check an order's status.
         """
         return call_sync(self.request_impl.get_order(symbol, orderId, origClientOrderId))
+
+    def get_open_orders(self, symbol: 'str' = None) -> any:
+        """
+        Current Open Orders (USER_DATA)
+
+        GET /api/v3/openOrders (HMAC SHA256)
+
+        Get all open orders on a symbol. Careful when accessing this with no symbol.
+        """
+        return call_sync(self.request_impl.get_open_orders(symbol))
