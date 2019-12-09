@@ -469,3 +469,13 @@ class RequestClient(object):
         Cancel an active order.
         """
         return call_sync(self.request_impl.cancel_order(symbol, orderId, origClientOrderId, newClientOrderId))
+
+    def get_order(self, symbol: 'str', orderId: 'long' = None, origClientOrderId: 'str' = None) -> any:
+        """
+        Query Order (USER_DATA)
+
+        GET /api/v3/order (HMAC SHA256)
+
+        Check an order's status.
+        """
+        return call_sync(self.request_impl.get_order(symbol, orderId, origClientOrderId))

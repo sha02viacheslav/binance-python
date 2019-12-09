@@ -872,8 +872,7 @@ class RestApiRequestImpl(object):
 
         request.json_parser = parse
         return request
-      
-      
+       
     def cancel_order(self, symbol, orderId, origClientOrderId, newClientOrderId):
         check_should_not_none(symbol, "symbol")
         builder = UrlParamsBuilder()
@@ -886,6 +885,22 @@ class RestApiRequestImpl(object):
 
         def parse(json_wrapper):
             information = CancelOrder.json_parse(json_wrapper)
+            return information
+
+        request.json_parser = parse
+        return request
+      
+    def get_order(self, symbol, orderId, origClientOrderId):
+        check_should_not_none(symbol, "symbol")
+        builder = UrlParamsBuilder()
+        builder.put_url("symbol", symbol)
+        builder.put_url("orderId", orderId)
+        builder.put_url("origClientOrderId", origClientOrderId)
+
+        request = self.__create_request_by_get_with_signature("/api/v3/order", builder)
+
+        def parse(json_wrapper):
+            information = Order.json_parse(json_wrapper)
             return information
 
         request.json_parser = parse
