@@ -181,3 +181,22 @@ class WebsocketRequestImpl(object):
         request.error_handler = error_handler
 
         return request
+    
+    def subscribe_all_bookticker_event(self, callback, error_handler=None):
+        check_should_not_none(callback, "callback")
+
+        def subscription_handler(connection):
+            connection.send(all_bookticker_channel())
+            time.sleep(0.01)
+
+        def json_parse(json_wrapper):
+            all_bookticker_event_obj = SymbolBookTickerEvent.json_parse(json_wrapper)
+            return all_bookticker_event_obj
+
+        request = WebsocketRequest()
+        request.subscription_handler = subscription_handler
+        request.json_parser = json_parse
+        request.update_callback = callback
+        request.error_handler = error_handler
+
+        return request

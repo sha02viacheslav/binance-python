@@ -146,6 +146,17 @@ class SubscriptionClient(object):
         """
         request = self.websocket_request_impl.subscribe_symbol_bookticker_event(symbol, callback, error_handler)
         self.__create_connection(request)
+           
+    def subscribe_all_bookticker_event(self, callback, error_handler=None):
+        """
+        All Book Tickers Stream
+
+        Pushes any update to the best bid or ask's price or quantity in real-time for all symbols.
+
+        Stream Name: !bookTicker
+        """
+        request = self.websocket_request_impl.subscribe_all_bookticker_event(callback, error_handler)
+        self.__create_connection(request)
 
     def unsubscribe_all(self):
         for conn in self.connections:

@@ -66,3 +66,11 @@ def symbol_bookticker_channel(symbol):
     channel["id"] = get_current_timestamp()
     channel["method"] = "SUBSCRIBE"
     return json.dumps(channel)
+
+def all_bookticker_channel():
+    channel = dict()
+    channel["params"] = list()
+    channel["params"].append("!bookTicker")
+    channel["id"] = get_current_timestamp()
+    channel["method"] = "SUBSCRIBE"
+    return json.dumps(channel)
