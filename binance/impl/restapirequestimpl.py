@@ -1257,7 +1257,7 @@ class RestApiRequestImpl(object):
         builder.put_url("current", current)
         builder.put_url("size", size)
 
-        request = self.__create_request_by_get_with_apikey("/sapi/v1/margin/transfer", builder)
+        request = self.__create_request_by_get_with_signature("/sapi/v1/margin/transfer", builder)
 
         def parse(json_wrapper):
             result = list()
@@ -1280,7 +1280,7 @@ class RestApiRequestImpl(object):
         builder.put_url("current", current)
         builder.put_url("size", size)
 
-        request = self.__create_request_by_get_with_apikey("/sapi/v1/margin/loan", builder)
+        request = self.__create_request_by_get_with_signature("/sapi/v1/margin/loan", builder)
 
         def parse(json_wrapper):
             result = list()
@@ -1303,7 +1303,7 @@ class RestApiRequestImpl(object):
         builder.put_url("current", current)
         builder.put_url("size", size)
 
-        request = self.__create_request_by_get_with_apikey("/sapi/v1/margin/repay", builder)
+        request = self.__create_request_by_get_with_signature("/sapi/v1/margin/repay", builder)
 
         def parse(json_wrapper):
             result = list()
@@ -1324,7 +1324,7 @@ class RestApiRequestImpl(object):
         builder.put_url("current", current)
         builder.put_url("size", size)
 
-        request = self.__create_request_by_get_with_apikey("/sapi/v1/margin/interest", builder)
+        request = self.__create_request_by_get_with_signature("/sapi/v1/margin/interestHistory", builder)
 
         def parse(json_wrapper):
             result = list()
@@ -1344,7 +1344,7 @@ class RestApiRequestImpl(object):
         builder.put_url("current", current)
         builder.put_url("size", size)
 
-        request = self.__create_request_by_get_with_apikey("/sapi/v1/margin/forceLiquidationRec", builder)
+        request = self.__create_request_by_get_with_signature("/sapi/v1/margin/forceLiquidationRec", builder)
 
         def parse(json_wrapper):
             result = list()
@@ -1360,7 +1360,7 @@ class RestApiRequestImpl(object):
     def get_margin_account(self):
         builder = UrlParamsBuilder()
 
-        request = self.__create_request_by_get_with_apikey("/sapi/v1/margin/account", builder)
+        request = self.__create_request_by_get_with_signature("/sapi/v1/margin/account", builder)
 
         def parse(json_wrapper):
             result = MarginAccount.json_parse(json_wrapper)
