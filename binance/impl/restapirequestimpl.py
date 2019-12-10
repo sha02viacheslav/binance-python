@@ -976,5 +976,21 @@ class RestApiRequestImpl(object):
 
         request.json_parser = parse
         return request
+ 
+    def get_open_oco(self):
+        builder = UrlParamsBuilder()
+
+        request = self.__create_request_by_get_with_signature("/api/v3/openOrderList", builder)
+
+        def parse(json_wrapper):
+            oco_list = list()
+            data_list = json_wrapper.convert_2_array()
+            for item in data_list.get_items():
+                oco = Oco.json_parse(item)
+                oco_list.append(oco)
+            return oco_list
+
+        request.json_parser = parse
+        return request
       
         

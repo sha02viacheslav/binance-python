@@ -516,3 +516,11 @@ class RequestClient(object):
         return call_sync(self.request_impl.post_oco(symbol, listClientOrderId, side, quantity,
                 limitClientOrderId, price, limitIcebergQty, stopClientOrderId, stopPrice, stopLimitPrice,
                 stopIcebergQty, stopLimitTimeInForce, newOrderRespType))
+    
+    def get_open_oco(self) -> any:
+        """
+        Query Open OCO (USER_DATA)
+
+        GET /api/v3/openOrderList (HMAC SHA256)
+        """
+        return call_sync(self.request_impl.get_open_oco())
