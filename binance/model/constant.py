@@ -239,3 +239,9 @@ class InstrumentStatus:
 class SubscribeMessageType:
     RESPONSE = "response"
     PAYLOAD = "payload"
+
+
+class MarginTransferType:
+    IN = "1"
+    OUT = "2"
+    INVALID = None

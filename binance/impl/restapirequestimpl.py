@@ -1077,5 +1077,23 @@ class RestApiRequestImpl(object):
 
         request.json_parser = parse
         return request
+          
+    def post_margin_transfer(self, asset, amount, transferType):
+        check_should_not_none(asset, "asset")
+        check_should_not_none(amount, "amount")
+        check_should_not_none(transferType, "transferType")
+        builder = UrlParamsBuilder()
+        builder.put_url("asset", asset)
+        builder.put_url("amount", amount)
+        builder.put_url("type", transferType)
+
+        request = self.__create_request_by_post_with_signature("/sapi/v1/margin/transfer", builder)
+
+        def parse(json_wrapper):
+            tranId = json_wrapper.get_int("tranId")
+            return tranId
+
+        request.json_parser = parse
+        return request
       
         

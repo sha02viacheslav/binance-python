@@ -575,3 +575,13 @@ class RequestClient(object):
         Get trades for a specific account and symbol.
         """
         return call_sync(self.request_impl.get_account_trades(symbol, startTime, endTime, fromId, limit))
+    
+    def post_margin_transfer(self, asset: 'str', amount: 'float', transferType: 'MarginTransferType') -> any:
+        """
+        Margin Account Transfer (MARGIN)
+
+        POST /sapi/v1/margin/transfer (HMAC SHA256)
+
+        Execute transfer between spot account and margin account.
+        """
+        return call_sync(self.request_impl.post_margin_transfer(asset, amount, transferType))
