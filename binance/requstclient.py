@@ -629,3 +629,11 @@ class RequestClient(object):
         GET /sapi/v1/margin/allAssets
         """
         return call_sync(self.request_impl.get_margin_assets())
+    
+    def get_margin_pairs(self) -> any:
+        """
+        Get All Margin Pairs (MARKET_DATA)
+
+        GET /sapi/v1/margin/allPairs
+        """
+        return call_sync(self.request_impl.get_margin_pairs())
