@@ -712,3 +712,12 @@ class RequestClient(object):
         GET /sapi/v1/margin/interestHistory (HMAC SHA256)
         """
         return call_sync(self.request_impl.get_margin_interest(asset, startTime, endTime, current, size))
+
+    def get_margin_force_liquidation(self, startTime: 'long' = None, endTime: 'long' = None, 
+                            current: 'long' = None, size: 'long' = None) -> any:
+        """
+        Get Force Liquidation Record (USER_DATA)
+
+        GET /sapi/v1/margin/forceLiquidationRec (HMAC SHA256)
+        """
+        return call_sync(self.request_impl.get_margin_force_liquidation(startTime, endTime, current, size))
