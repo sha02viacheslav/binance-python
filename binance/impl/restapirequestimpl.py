@@ -1111,5 +1111,21 @@ class RestApiRequestImpl(object):
 
         request.json_parser = parse
         return request
+          
+    def post_margin_repay(self, asset, amount):
+        check_should_not_none(asset, "asset")
+        check_should_not_none(amount, "amount")
+        builder = UrlParamsBuilder()
+        builder.put_url("asset", asset)
+        builder.put_url("amount", amount)
+
+        request = self.__create_request_by_post_with_signature("/sapi/v1/margin/repay", builder)
+
+        def parse(json_wrapper):
+            tranId = json_wrapper.get_int("tranId")
+            return tranId
+
+        request.json_parser = parse
+        return request
       
         

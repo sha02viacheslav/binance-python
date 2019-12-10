@@ -595,3 +595,13 @@ class RequestClient(object):
         Apply for a loan.
         """
         return call_sync(self.request_impl.post_margin_borrow(asset, amount))
+    
+    def post_margin_repay(self, asset: 'str', amount: 'float') -> any:
+        """
+        Margin Account Repay (MARGIN)
+
+        POST /sapi/v1/margin/repay (HMAC SHA256)
+
+        Repay loan for margin account.
+        """
+        return call_sync(self.request_impl.post_margin_repay(asset, amount))
