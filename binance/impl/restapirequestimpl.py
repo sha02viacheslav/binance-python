@@ -1229,5 +1229,22 @@ class RestApiRequestImpl(object):
 
         request.json_parser = parse
         return request
+
+    def cancel_margin_order(self, symbol, orderId, origClientOrderId, newClientOrderId):
+        check_should_not_none(symbol, "symbol")
+        builder = UrlParamsBuilder()
+        builder.put_url("symbol", symbol)
+        builder.put_url("orderId", orderId)
+        builder.put_url("origClientOrderId", origClientOrderId)
+        builder.put_url("newClientOrderId", newClientOrderId)
+
+        request = self.__create_request_by_delete_with_signature("/sapi/v1/margin/order", builder)
+
+        def parse(json_wrapper):
+            result = MarginCancelOrder.json_parse(json_wrapper)
+            return result
+
+        request.json_parser = parse
+        return request
       
         

@@ -661,3 +661,14 @@ class RequestClient(object):
         """
         return call_sync(self.request_impl.post_margin_order(symbol, side, ordertype, 
                 quantity, price, stopPrice, newClientOrderId, icebergQty, newOrderRespType, sideEffectType, timeInForce))
+
+    def cancel_margin_order(self, symbol: 'str', orderId: 'long' = None, origClientOrderId: 'str' = None, 
+                    newClientOrderId: 'str' = None) -> any:
+        """
+        Margin Account Cancel Order (TRADE)
+
+        DELETE /sapi/v1/margin/order (HMAC SHA256) 
+        
+        Cancel an active order for margin account.
+        """
+        return call_sync(self.request_impl.cancel_margin_order(symbol, orderId, origClientOrderId, newClientOrderId))
