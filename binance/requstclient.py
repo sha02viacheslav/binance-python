@@ -763,3 +763,11 @@ class RequestClient(object):
         Get /sapi/v1/margin/myTrades
         """
         return call_sync(self.request_impl.get_margin_trades(symbol, startTime, endTime, fromId, limit))
+
+    def get_margin_max_borrow(self, asset: 'str') -> any:
+        """
+        Query Max Borrow (USER_DATA)
+
+        Get /sapi/v1/margin/maxBorrowable
+        """
+        return call_sync(self.request_impl.get_margin_max_borrow(asset))
