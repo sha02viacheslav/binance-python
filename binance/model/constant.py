@@ -246,6 +246,13 @@ class MarginTransferType:
     OUT = "2"
     INVALID = None
 
+
+class TransferType:
+    ROLL_IN = "ROLL_IN"
+    ROLL_OUT = "ROLL_OUT"
+    INVALID = None
+    
+
 class SideEffectType:
     NO_SIDE_EFFECT = "NO_SIDE_EFFECT"
     MARGIN_BUY = "MARGIN_BUY"

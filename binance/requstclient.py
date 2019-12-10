@@ -672,3 +672,13 @@ class RequestClient(object):
         Cancel an active order for margin account.
         """
         return call_sync(self.request_impl.cancel_margin_order(symbol, orderId, origClientOrderId, newClientOrderId))
+
+    def get_margin_transfer(self, transferType: 'TransferType', asset: 'str' = None,
+                            startTime: 'long' = None, endTime: 'long' = None, 
+                            current: 'long' = None, size: 'long' = None) -> any:
+        """
+        Get Transfer History (USER_DATA)
+
+        GET /sapi/v1/margin/transfer (HMAC SHA256)
+        """
+        return call_sync(self.request_impl.get_margin_transfer(asset, transferType, startTime, endTime, current, size))
