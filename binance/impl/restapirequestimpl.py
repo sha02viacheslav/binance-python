@@ -1155,5 +1155,21 @@ class RestApiRequestImpl(object):
 
         request.json_parser = parse
         return request
+         
+    def get_margin_assets(self):
+        builder = UrlParamsBuilder()
+
+        request = self.__create_request_by_get_with_apikey("/sapi/v1/margin/allAssets", builder)
+
+        def parse(json_wrapper):
+            result = list()
+            data_list = json_wrapper.convert_2_array()
+            for item in data_list.get_items():
+                element = MarginAsset.json_parse(item)
+                result.append(element)
+            return result
+
+        request.json_parser = parse
+        return request
       
         
