@@ -1141,5 +1141,19 @@ class RestApiRequestImpl(object):
 
         request.json_parser = parse
         return request
+          
+    def get_margin_pair(self, symbol):
+        check_should_not_none(symbol, "symbol")
+        builder = UrlParamsBuilder()
+        builder.put_url("symbol", symbol)
+
+        request = self.__create_request_by_get_with_apikey("/sapi/v1/margin/pair", builder)
+
+        def parse(json_wrapper):
+            result = MarginPair.json_parse(json_wrapper)
+            return result
+
+        request.json_parser = parse
+        return request
       
         

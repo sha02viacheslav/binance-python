@@ -50,3 +50,4 @@ from binance.model.canceloco import CancelOco
 from binance.model.accountinformation import AccountInformation
 from binance.model.mytrade import MyTrade
 from binance.model.marginasset import MarginAsset
+from binance.model.marginpair import MarginPair
