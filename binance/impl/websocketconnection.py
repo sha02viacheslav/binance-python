@@ -68,7 +68,6 @@ def websocket_func(*args):
 class WebsocketConnection:
 
     def __init__(self, api_key, secret_key, uri, watch_dog, request):
-        # threading.Thread.__init__(self)
         self.__thread = None
         self.url = "wss://stream.binance.com:9443/ws"
         self.__api_key = api_key
@@ -119,24 +118,13 @@ class WebsocketConnection:
         self.logger.error("[Sub][" + str(self.id) + "] Closing normally")
 
     def on_open(self, ws):
-        #print("### open ###")
         self.logger.info("[Sub][" + str(self.id) + "] Connected to server")
         self.ws = ws
         self.last_receive_time = get_current_timestamp()
         self.state = ConnectionState.CONNECTED
         self.__watch_dog.on_connection_created(self)
-        if self.request.is_trading:
-            try:
-                builder = UrlParamsBuilder()
-                create_signature(self.__api_key, self.__secret_key,
-                                 "GET", self.url, builder)
-                builder.put_url("op", "auth")
-                self.send(builder.build_url_to_json())
-            except Exception as e:
-                self.on_error("Unexpected error when create the signature: " + str(e))
-        else:
-            if self.request.subscription_handler is not None:
-                self.request.subscription_handler(self)
+        if self.request.subscription_handler is not None:
+            self.request.subscription_handler(self)
         return
 
     def on_error(self, error_message):
@@ -152,12 +140,8 @@ class WebsocketConnection:
         self.close_on_error()
 
     def on_message(self, message):
-        # print('on_message: ', message)
         self.last_receive_time = get_current_timestamp()
         json_wrapper = parse_json_from_string(message)
-        # json_wrapper = parse_json_from_string(gzip.decompress(message).decode("utf-8"))
-        #print("RX: " + gzip.decompress(message).decode("utf-8"))
-        # PrintMix.print_data(json_wrapper)
 
         if json_wrapper.contain_key("status") and json_wrapper.get_string("status") != "ok":
             error_code = json_wrapper.get_string_or_default("err-code", "Unknown error")
@@ -167,22 +151,6 @@ class WebsocketConnection:
             error_code = json_wrapper.get_string_or_default("err-code", "Unknown error")
             error_msg = json_wrapper.get_string_or_default("err-msg", "Unknown error")
             self.on_error(error_code + ": " + error_msg)
-        # elif json_wrapper.contain_key("op"):
-        #     op = json_wrapper.get_string("op")
-        #     if op == "notify":
-        #         self.__on_receive(json_wrapper)
-        #     elif op == "ping":
-        #         ping_ts = json_wrapper.get_string("ts")
-        #         self.__process_ping_on_trading_line(ping_ts)
-        #     elif op == "auth":
-        #         if self.request.subscription_handler is not None:
-        #             self.request.subscription_handler(self)
-        #     elif op == "req":
-        #         self.__on_receive(json_wrapper)
-        # elif json_wrapper.contain_key("ch"):
-        #     self.__on_receive(json_wrapper)
-        # elif json_wrapper.contain_key("rep"):
-        #     self.__on_receive(json_wrapper)
         elif json_wrapper.contain_key("result") and json_wrapper.contain_key("id"):
             self.__on_receive_response(json_wrapper)
         else:
@@ -221,14 +189,10 @@ class WebsocketConnection:
             self.close()
 
     def __process_ping_on_trading_line(self, ping_ts):
-        #self.send("{\"op\":\"pong\",\"ts\":" + str(get_current_timestamp()) + "}")
-        #PrintDate.timestamp_to_date(ping_ts)
         self.send("{\"op\":\"pong\",\"ts\":" + str(ping_ts) + "}")
         return
 
     def __process_ping_on_market_line(self, ping_ts):
-        #self.send("{\"pong\":" + str(get_current_timestamp()) + "}")
-        #PrintDate.timestamp_to_date(ping_ts)
         self.send("{\"pong\":" + str(ping_ts) + "}")
         return
 
