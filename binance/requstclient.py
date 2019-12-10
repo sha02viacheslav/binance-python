@@ -585,3 +585,13 @@ class RequestClient(object):
         Execute transfer between spot account and margin account.
         """
         return call_sync(self.request_impl.post_margin_transfer(asset, amount, transferType))
+    
+    def post_margin_borrow(self, asset: 'str', amount: 'float') -> any:
+        """
+        Margin Account Borrow (MARGIN)
+
+        POST /sapi/v1/margin/loan (HMAC SHA256)
+
+        Apply for a loan.
+        """
+        return call_sync(self.request_impl.post_margin_borrow(asset, amount))
