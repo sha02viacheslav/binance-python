@@ -721,3 +721,11 @@ class RequestClient(object):
         GET /sapi/v1/margin/forceLiquidationRec (HMAC SHA256)
         """
         return call_sync(self.request_impl.get_margin_force_liquidation(startTime, endTime, current, size))
+
+    def get_margin_account(self) -> any:
+        """
+        Query Margin Account Details (USER_DATA)
+
+        GET /sapi/v1/margin/account (HMAC SHA256)
+        """
+        return call_sync(self.request_impl.get_margin_account())

@@ -1357,4 +1357,16 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
       
+    def get_margin_account(self):
+        builder = UrlParamsBuilder()
+
+        request = self.__create_request_by_get_with_apikey("/sapi/v1/margin/account", builder)
+
+        def parse(json_wrapper):
+            result = MarginAccount.json_parse(json_wrapper)
+            return result
+
+        request.json_parser = parse
+        return request
+      
         
