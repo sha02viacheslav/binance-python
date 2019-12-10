@@ -692,3 +692,13 @@ class RequestClient(object):
         GET /sapi/v1/margin/loan (HMAC SHA256)
         """
         return call_sync(self.request_impl.get_margin_loan(asset, txId, startTime, endTime, current, size))
+
+    def get_margin_repay(self, asset: 'str', txId: 'long' = None,
+                            startTime: 'long' = None, endTime: 'long' = None, 
+                            current: 'long' = None, size: 'long' = None) -> any:
+        """
+        Query Repay Record (USER_DATA)
+
+        GET /sapi/v1/margin/repay (HMAC SHA256)
+        """
+        return call_sync(self.request_impl.get_margin_repay(asset, txId, startTime, endTime, current, size))
