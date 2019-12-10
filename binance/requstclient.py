@@ -637,3 +637,11 @@ class RequestClient(object):
         GET /sapi/v1/margin/allPairs
         """
         return call_sync(self.request_impl.get_margin_pairs())
+    
+    def get_margin_priceindex(self, symbol: 'str') -> any:
+        """
+        Query Margin PriceIndex (MARKET_DATA)
+
+        GET /sapi/v1/margin/priceIndex
+        """
+        return call_sync(self.request_impl.get_margin_priceindex(symbol))

@@ -1171,8 +1171,7 @@ class RestApiRequestImpl(object):
 
         request.json_parser = parse
         return request
-      
-         
+           
     def get_margin_pairs(self):
         builder = UrlParamsBuilder()
 
@@ -1184,6 +1183,20 @@ class RestApiRequestImpl(object):
             for item in data_list.get_items():
                 element = MarginPair.json_parse(item)
                 result.append(element)
+            return result
+
+        request.json_parser = parse
+        return request
+      
+    def get_margin_priceindex(self, symbol):
+        check_should_not_none(symbol, "symbol")
+        builder = UrlParamsBuilder()
+        builder.put_url("symbol", symbol)
+
+        request = self.__create_request_by_get_with_apikey("/sapi/v1/margin/priceIndex", builder)
+
+        def parse(json_wrapper):
+            result = MarginPriceIndex.json_parse(json_wrapper)
             return result
 
         request.json_parser = parse
