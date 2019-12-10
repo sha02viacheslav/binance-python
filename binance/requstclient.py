@@ -524,3 +524,12 @@ class RequestClient(object):
         GET /api/v3/openOrderList (HMAC SHA256)
         """
         return call_sync(self.request_impl.get_open_oco())
+    
+    def get_all_oco(self, fromId: 'long' = None, startTime: 'long' = None, 
+                        endTime: 'long' = None, limit: 'int' = None) -> any:
+        """
+        Query all OCO (USER_DATA)
+
+        GET /api/v3/allOrderList (HMAC SHA256)
+        """
+        return call_sync(self.request_impl.get_all_oco(fromId, startTime, endTime, limit))
