@@ -1044,4 +1044,17 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
       
+           
+    def get_account_information(self):
+        builder = UrlParamsBuilder()
+
+        request = self.__create_request_by_get_with_signature("/api/v3/account", builder)
+
+        def parse(json_wrapper):
+            information = AccountInformation.json_parse(json_wrapper)
+            return information
+
+        request.json_parser = parse
+        return request
+      
         

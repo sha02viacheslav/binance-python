@@ -554,3 +554,13 @@ class RequestClient(object):
         Cancel an entire Order List
         """
         return call_sync(self.request_impl.cancel_oco(symbol, orderListId, listClientOrderId, newClientOrderId))
+    
+    def get_account_information(self) -> any:
+        """
+        Account Information (USER_DATA)
+
+        GET /api/v3/account (HMAC SHA256)
+
+        Get current account information.
+        """
+        return call_sync(self.request_impl.get_account_information())
