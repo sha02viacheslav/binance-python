@@ -1460,4 +1460,18 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
       
+    def get_margin_max_transfer(self, asset):
+        check_should_not_none(asset, "asset")
+        builder = UrlParamsBuilder()
+        builder.put_url("asset", asset)
+
+        request = self.__create_request_by_get_with_signature("/sapi/v1/margin/maxTransferable", builder)
+
+        def parse(json_wrapper):
+            result = json_wrapper.get_float("amount")
+            return result
+
+        request.json_parser = parse
+        return request
+      
         

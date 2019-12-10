@@ -771,3 +771,11 @@ class RequestClient(object):
         Get /sapi/v1/margin/maxBorrowable
         """
         return call_sync(self.request_impl.get_margin_max_borrow(asset))
+
+    def get_margin_max_transfer(self, asset: 'str') -> any:
+        """
+        Query Max Transfer-Out Amount (USER_DATA)
+
+        Get /sapi/v1/margin/maxTransferable
+        """
+        return call_sync(self.request_impl.get_margin_max_transfer(asset))
