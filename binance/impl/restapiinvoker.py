@@ -9,12 +9,12 @@ def check_response(json_wrapper):
     if json_wrapper.contain_key("success"):
         success = json_wrapper.get_boolean("success")
         if success is False:
-            err_code = etf_result_check(json_wrapper.get_int_or_default("code", ""))
+            err_code = json_wrapper.get_int_or_default("code", "")
             err_msg = json_wrapper.get_string_or_default("msg", "")
             if err_code == "":
                 raise BinanceApiException(BinanceApiException.EXEC_ERROR, "[Executing] " + err_msg)
             else:
-                raise BinanceApiException(BinanceApiException.EXEC_ERROR, "[Executing] " + err_code + ": " + err_msg)
+                raise BinanceApiException(BinanceApiException.EXEC_ERROR, "[Executing] " + str(err_code) + ": " + err_msg)
     elif json_wrapper.contain_key("code"):
         code = json_wrapper.get_int("code")
         msg = json_wrapper.get_string_or_default("msg", "")
