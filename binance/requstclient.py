@@ -564,3 +564,14 @@ class RequestClient(object):
         Get current account information.
         """
         return call_sync(self.request_impl.get_account_information())
+    
+    def get_account_trades(self, symbol: 'str', startTime: 'long' = None, endTime: 'long' = None, 
+                        fromId: 'long' = None, limit: 'int' = None) -> any:
+        """
+        Account Trade List (USER_DATA)
+
+        GET /api/v3/myTrades (HMAC SHA256)
+
+        Get trades for a specific account and symbol.
+        """
+        return call_sync(self.request_impl.get_account_trades(symbol, startTime, endTime, fromId, limit))

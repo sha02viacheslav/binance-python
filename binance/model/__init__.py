@@ -48,3 +48,4 @@ from binance.model.newoco import NewOco
 from binance.model.oco import Oco
 from binance.model.canceloco import CancelOco
 from binance.model.accountinformation import AccountInformation
+from binance.model.mytrade import MyTrade

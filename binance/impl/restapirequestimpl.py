@@ -1043,8 +1043,7 @@ class RestApiRequestImpl(object):
 
         request.json_parser = parse
         return request
-      
-           
+              
     def get_account_information(self):
         builder = UrlParamsBuilder()
 
@@ -1053,6 +1052,28 @@ class RestApiRequestImpl(object):
         def parse(json_wrapper):
             information = AccountInformation.json_parse(json_wrapper)
             return information
+
+        request.json_parser = parse
+        return request
+          
+    def get_account_trades(self, symbol, startTime, endTime, fromId, limit):
+        check_should_not_none(symbol, "symbol")
+        builder = UrlParamsBuilder()
+        builder.put_url("symbol", symbol)
+        builder.put_url("startTime", startTime)
+        builder.put_url("endTime", endTime)
+        builder.put_url("fromId", fromId)
+        builder.put_url("limit", limit)
+
+        request = self.__create_request_by_get_with_signature("/api/v3/myTrades", builder)
+
+        def parse(json_wrapper):
+            trade_list = list()
+            data_list = json_wrapper.convert_2_array()
+            for item in data_list.get_items():
+                trade = MyTrade.json_parse(item)
+                trade_list.append(trade)
+            return trade_list
 
         request.json_parser = parse
         return request
