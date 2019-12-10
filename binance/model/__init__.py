@@ -60,3 +60,4 @@ from binance.model.marginrepay import MarginRepay
 from binance.model.margininterest import MarginInterest
 from binance.model.marginforceliquidation import MarginForceLiquidation
 from binance.model.marginaccount import MarginAccount
+from binance.model.marginorder import MarginOrder

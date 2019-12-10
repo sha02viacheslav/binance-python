@@ -1369,4 +1369,20 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
       
+    def get_margin_order(self, symbol, orderId, origClientOrderId):
+        check_should_not_none(symbol, "symbol")
+        builder = UrlParamsBuilder()
+        builder.put_url("symbol", symbol)
+        builder.put_url("orderId", orderId)
+        builder.put_url("origClientOrderId", origClientOrderId)
+
+        request = self.__create_request_by_get_with_signature("/sapi/v1/margin/order", builder)
+
+        def parse(json_wrapper):
+            result = MarginOrder.json_parse(json_wrapper)
+            return result
+
+        request.json_parser = parse
+        return request
+      
         
