@@ -533,3 +533,13 @@ class RequestClient(object):
         GET /api/v3/allOrderList (HMAC SHA256)
         """
         return call_sync(self.request_impl.get_all_oco(fromId, startTime, endTime, limit))
+    
+    def get_oco(self, orderListId: 'long' = None, origClientOrderId: 'str' = None) -> any:
+        """
+        Query OCO (USER_DATA)
+
+        GET /api/v3/orderList (HMAC SHA256)
+
+        Retrieves a specific OCO based on provided optional parameters
+        """
+        return call_sync(self.request_impl.get_oco(orderListId, origClientOrderId))

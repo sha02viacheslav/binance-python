@@ -1012,5 +1012,19 @@ class RestApiRequestImpl(object):
 
         request.json_parser = parse
         return request
+ 
+    def get_oco(self, orderListId, origClientOrderId):
+        builder = UrlParamsBuilder()
+        builder.put_url("orderListId", orderListId)
+        builder.put_url("origClientOrderId", origClientOrderId)
+
+        request = self.__create_request_by_get_with_signature("/api/v3/orderList", builder)
+
+        def parse(json_wrapper):
+            oco = Oco.json_parse(json_wrapper)
+            return oco
+
+        request.json_parser = parse
+        return request
       
         
