@@ -945,4 +945,36 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
       
+    def post_oco(self, symbol, listClientOrderId, side, quantity,
+                limitClientOrderId, price, limitIcebergQty, stopClientOrderId, stopPrice, stopLimitPrice,
+                stopIcebergQty, stopLimitTimeInForce, newOrderRespType):
+        check_should_not_none(symbol, "symbol")
+        check_should_not_none(side, "side")
+        check_should_not_none(quantity, "quantity")
+        check_should_not_none(price, "price")
+        check_should_not_none(stopPrice, "stopPrice")
+        builder = UrlParamsBuilder()
+        builder.put_url("symbol", symbol)
+        builder.put_url("listClientOrderId", listClientOrderId)
+        builder.put_url("side", side)
+        builder.put_url("quantity", quantity)
+        builder.put_url("limitClientOrderId", limitClientOrderId)
+        builder.put_url("price", price)
+        builder.put_url("limitIcebergQty", limitIcebergQty)
+        builder.put_url("stopClientOrderId", stopClientOrderId)
+        builder.put_url("stopPrice", stopPrice)
+        builder.put_url("stopLimitPrice", stopLimitPrice)
+        builder.put_url("stopIcebergQty", stopIcebergQty)
+        builder.put_url("stopLimitTimeInForce", stopLimitTimeInForce)
+        builder.put_url("newOrderRespType", newOrderRespType)
+
+        request = self.__create_request_by_post_with_signature("/api/v3/order/oco", builder)
+
+        def parse(json_wrapper):
+            information = NewOco.json_parse(json_wrapper)
+            return information
+
+        request.json_parser = parse
+        return request
+      
         

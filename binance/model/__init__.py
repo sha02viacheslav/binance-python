@@ -44,3 +44,4 @@ from binance.model.diffdepthevent import DiffDepthEvent
 from binance.model.neworder import NewOrder
 from binance.model.cancelorder import CancelOrder
 from binance.model.order import Order
+from binance.model.newoco import NewOco

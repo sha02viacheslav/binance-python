@@ -500,3 +500,19 @@ class RequestClient(object):
         Get all account orders; active, canceled, or filled.
         """
         return call_sync(self.request_impl.get_all_orders(symbol, orderId, startTime, endTime, limit))
+    
+    def post_oco(self, symbol: 'str', side: 'OrderSide', quantity: 'float', price: 'float', stopPrice: 'float', 
+                listClientOrderId: 'str' = None, limitClientOrderId: 'str' = None, limitIcebergQty: 'float' = None,
+                stopClientOrderId: 'str' = None, stopLimitPrice: 'float' = None,
+                stopIcebergQty: 'float' = None, stopLimitTimeInForce: 'TimeInForce' = TimeInForce.INVALID,
+                newOrderRespType: 'OrderRespType' = OrderRespType.INVALID) -> any:
+        """
+        New OCO (TRADE)
+
+        POST /api/v3/order/oco (HMAC SHA256)
+
+        Send in a new OCO
+        """
+        return call_sync(self.request_impl.post_oco(symbol, listClientOrderId, side, quantity,
+                limitClientOrderId, price, limitIcebergQty, stopClientOrderId, stopPrice, stopLimitPrice,
+                stopIcebergQty, stopLimitTimeInForce, newOrderRespType))
