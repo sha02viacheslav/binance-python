@@ -605,3 +605,11 @@ class RequestClient(object):
         Repay loan for margin account.
         """
         return call_sync(self.request_impl.post_margin_repay(asset, amount))
+    
+    def get_margin_asset(self, asset: 'str') -> any:
+        """
+        Query Margin Asset (MARKET_DATA)
+
+        GET /sapi/v1/margin/asset
+        """
+        return call_sync(self.request_impl.get_margin_asset(asset))
