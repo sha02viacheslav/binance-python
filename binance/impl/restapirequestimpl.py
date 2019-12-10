@@ -1201,5 +1201,33 @@ class RestApiRequestImpl(object):
 
         request.json_parser = parse
         return request
+       
+    def post_margin_order(self, symbol, side, ordertype, 
+                quantity, price, stopPrice, newClientOrderId, icebergQty, newOrderRespType, sideEffectType, timeInForce):
+        check_should_not_none(symbol, "symbol")
+        check_should_not_none(side, "side")
+        check_should_not_none(ordertype, "ordertype")
+        check_should_not_none(quantity, "quantity")
+        builder = UrlParamsBuilder()
+        builder.put_url("symbol", symbol)
+        builder.put_url("side", side)
+        builder.put_url("type", ordertype)
+        builder.put_url("quantity", quantity)
+        builder.put_url("price", price)
+        builder.put_url("stopPrice", stopPrice)
+        builder.put_url("newClientOrderId", newClientOrderId)
+        builder.put_url("icebergQty", icebergQty)
+        builder.put_url("newOrderRespType", newOrderRespType)
+        builder.put_url("sideEffectType", sideEffectType)
+        builder.put_url("timeInForce", timeInForce)
+
+        request = self.__create_request_by_post_with_signature("/sapi/v1/margin/order", builder)
+
+        def parse(json_wrapper):
+            result = MarginNewOrder.json_parse(json_wrapper)
+            return result
+
+        request.json_parser = parse
+        return request
       
         

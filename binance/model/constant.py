@@ -245,3 +245,9 @@ class MarginTransferType:
     IN = "1"
     OUT = "2"
     INVALID = None
+
+class SideEffectType:
+    NO_SIDE_EFFECT = "NO_SIDE_EFFECT"
+    MARGIN_BUY = "MARGIN_BUY"
+    AUTO_REPAY = "AUTO_REPAY"
+    INVALID = None

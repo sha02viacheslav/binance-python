@@ -645,3 +645,19 @@ class RequestClient(object):
         GET /sapi/v1/margin/priceIndex
         """
         return call_sync(self.request_impl.get_margin_priceindex(symbol))
+  
+    def post_margin_order(self, symbol: 'str', side: 'OrderSide', ordertype: 'OrderType', 
+                quantity: 'float' = None, price: 'float' = None, stopPrice: 'float' = None,
+                newClientOrderId: 'str' = None, icebergQty: 'float' = None,
+                newOrderRespType: 'OrderRespType' = OrderRespType.INVALID,
+                sideEffectType: 'SideEffectType' = SideEffectType.INVALID,
+                timeInForce: 'TimeInForce' = TimeInForce.INVALID) -> any:
+        """
+        Margin Account New Order (TRADE)
+
+        POST /sapi/v1/margin/order (HMAC SHA256) 
+        
+        Post a new order for margin account.
+        """
+        return call_sync(self.request_impl.post_margin_order(symbol, side, ordertype, 
+                quantity, price, stopPrice, newClientOrderId, icebergQty, newOrderRespType, sideEffectType, timeInForce))

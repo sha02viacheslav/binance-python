@@ -52,3 +52,4 @@ from binance.model.mytrade import MyTrade
 from binance.model.marginasset import MarginAsset
 from binance.model.marginpair import MarginPair
 from binance.model.marginpriceindex import MarginPriceIndex
+from binance.model.marginneworder import MarginNewOrder
