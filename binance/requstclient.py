@@ -745,3 +745,12 @@ class RequestClient(object):
         GET /sapi/v1/margin/openOrders (HMAC SHA256)
         """
         return call_sync(self.request_impl.get_margin_open_orders(symbol))
+
+    def get_margin_orders(self, symbol: 'str', orderId: 'long' = None, 
+                            startTime: 'long' = None, endTime: 'long' = None, limit: 'int' = None) -> any:
+        """
+        Query Margin Account's All Order (USER_DATA)
+
+        GET /sapi/v1/margin/allOrders (HMAC SHA256)
+        """
+        return call_sync(self.request_impl.get_margin_orders(symbol, orderId, startTime, endTime, limit))
