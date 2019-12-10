@@ -1385,4 +1385,21 @@ class RestApiRequestImpl(object):
         request.json_parser = parse
         return request
       
+    def get_margin_open_orders(self, symbol):
+        builder = UrlParamsBuilder()
+        builder.put_url("symbol", symbol)
+
+        request = self.__create_request_by_get_with_signature("/sapi/v1/margin/openOrders", builder)
+
+        def parse(json_wrapper):
+            result = list()
+            data_list = json_wrapper.convert_2_array()
+            for item in data_list.get_items():
+                element = MarginOrder.json_parse(item)
+                result.append(element)
+            return result
+
+        request.json_parser = parse
+        return request
+      
         
