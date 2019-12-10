@@ -1026,5 +1026,22 @@ class RestApiRequestImpl(object):
 
         request.json_parser = parse
         return request
+           
+    def cancel_oco(self, symbol, orderListId, listClientOrderId, newClientOrderId):
+        check_should_not_none(symbol, "symbol")
+        builder = UrlParamsBuilder()
+        builder.put_url("symbol", symbol)
+        builder.put_url("orderListId", orderListId)
+        builder.put_url("listClientOrderId", listClientOrderId)
+        builder.put_url("newClientOrderId", newClientOrderId)
+
+        request = self.__create_request_by_delete_with_signature("/api/v3/orderList", builder)
+
+        def parse(json_wrapper):
+            information = CancelOco.json_parse(json_wrapper)
+            return information
+
+        request.json_parser = parse
+        return request
       
         

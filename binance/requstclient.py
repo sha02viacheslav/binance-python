@@ -543,3 +543,14 @@ class RequestClient(object):
         Retrieves a specific OCO based on provided optional parameters
         """
         return call_sync(self.request_impl.get_oco(orderListId, origClientOrderId))
+    
+    def cancel_oco(self, symbol: 'str', orderListId: 'long' = None, listClientOrderId: 'str' = None, 
+                    newClientOrderId: 'str' = None) -> any:
+        """
+        Cancel OCO (TRADE)
+
+        DELETE /api/v3/orderList (HMAC SHA256)
+
+        Cancel an entire Order List
+        """
+        return call_sync(self.request_impl.cancel_oco(symbol, orderListId, listClientOrderId, newClientOrderId))
