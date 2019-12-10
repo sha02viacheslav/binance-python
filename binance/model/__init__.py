@@ -55,3 +55,4 @@ from binance.model.marginpriceindex import MarginPriceIndex
 from binance.model.marginneworder import MarginNewOrder
 from binance.model.margincancelorder import MarginCancelOrder
 from binance.model.margintransfer import MarginTransfer
+from binance.model.marginloan import MarginLoan
