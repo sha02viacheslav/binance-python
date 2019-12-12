@@ -29,7 +29,7 @@ class MyTrade:
         trade.commissionAsset = json_data.get_string("commissionAsset")
         trade.time = json_data.get_int("time")
         trade.isBuyer = json_data.get_boolean("isBuyer")
-        trade.isMaker = json_data.get_boolean("isBuyer")
+        trade.isMaker = json_data.get_boolean("isMaker")
         trade.isBestMatch = json_data.get_boolean("isBestMatch")
         
         return trade
