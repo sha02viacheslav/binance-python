@@ -1,8 +1,8 @@
 import threading
 import logging
 from apscheduler.schedulers.blocking import BlockingScheduler
-from huobi.impl.websocketconnection import ConnectionState
-from huobi.impl.utils.timeservice import get_current_timestamp
+from binance.impl.websocketconnection import ConnectionState
+from binance.impl.utils.timeservice import get_current_timestamp
 
 
 def watch_dog_job(*args):
@@ -33,7 +33,7 @@ class WebSocketWatchDog(threading.Thread):
         self.is_auto_connect = is_auto_connect
         self.receive_limit_ms = receive_limit_ms
         self.connection_delay_failure = connection_delay_failure
-        self.logger = logging.getLogger("huobi-client")
+        self.logger = logging.getLogger("binance-client")
         self.scheduler = BlockingScheduler()
         self.scheduler.add_job(watch_dog_job, "interval", max_instances=10, seconds=1, args=[self])
         self.start()

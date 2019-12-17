@@ -77,7 +77,7 @@ class WebsocketConnection:
         self.delay_in_second = -1
         self.ws = None
         self.last_receive_time = 0
-        self.logger = logging.getLogger("huobi-client")
+        self.logger = logging.getLogger("binance-client")
         self.state = ConnectionState.IDLE
         global connection_id
         connection_id += 1
