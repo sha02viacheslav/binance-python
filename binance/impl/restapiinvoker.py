@@ -1,6 +1,5 @@
 import requests
 from binance.exception.binanceapiexception import BinanceApiException
-from binance.impl.utils.etfresult import etf_result_check
 from binance.impl.utils import *
 # from binance.base.printobject import *
 
