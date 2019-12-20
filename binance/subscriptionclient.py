@@ -179,6 +179,13 @@ class SubscriptionClient(object):
         """
         request = self.websocket_request_impl.subscribe_diff_depth_event(symbol, callback, error_handler)
         self.__create_connection(request)
+           
+    def subscribe_user_data_event(self, listenKey: 'str', callback, error_handler=None):
+        """
+        User Data Streams
+        """
+        request = self.websocket_request_impl.subscribe_user_data_event(listenKey, callback, error_handler)
+        self.__create_connection(request)
 
     def unsubscribe_all(self):
         for conn in self.connections:

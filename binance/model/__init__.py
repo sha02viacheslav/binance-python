@@ -62,3 +62,8 @@ from binance.model.marginforceliquidation import MarginForceLiquidation
 from binance.model.marginaccount import MarginAccount
 from binance.model.marginorder import MarginOrder
 from binance.model.margintrade import MarginTrade
+from binance.model.outboundaccountinfo import OutboundAccountInfo
+from binance.model.outboundaccountposition import OutboundAccountPosition
+from binance.model.balanceupdate import BalanceUpdate
+from binance.model.executionreport import ExecutionReport
+from binance.model.liststatus import ListStatus

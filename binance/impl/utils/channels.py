@@ -90,3 +90,11 @@ def diff_depth_channel(symbol):
     channel["id"] = get_current_timestamp()
     channel["method"] = "SUBSCRIBE"
     return json.dumps(channel)
+
+def user_data_channel(listenKey):
+    channel = dict()
+    channel["params"] = list()
+    channel["params"].append(listenKey)
+    channel["id"] = get_current_timestamp()
+    channel["method"] = "SUBSCRIBE"
+    return json.dumps(channel)

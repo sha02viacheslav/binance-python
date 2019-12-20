@@ -241,3 +241,35 @@ class WebsocketRequestImpl(object):
         request.error_handler = error_handler
 
         return request
+  
+    def subscribe_user_data_event(self, listenKey, callback, error_handler=None):
+        check_should_not_none(listenKey, "listenKey")
+        check_should_not_none(callback, "callback")
+
+        def subscription_handler(connection):
+            connection.send(user_data_channel(listenKey))
+            time.sleep(0.01)
+
+        def json_parse(json_wrapper):
+            print("event type: ", json_wrapper.get_string("e"))
+            print(json_wrapper)
+            if(json_wrapper.get_string("e") == "outboundAccountInfo"):
+                result = OutboundAccountInfo.json_parse(json_wrapper)
+            elif(json_wrapper.get_string("e") == "outboundAccountPosition"):
+                result = OutboundAccountPosition.json_parse(json_wrapper)
+            elif(json_wrapper.get_string("e") == "balanceUpdate"):
+                result = BalanceUpdate.json_parse(json_wrapper)
+            elif(json_wrapper.get_string("e") == "executionReport"):
+                print(json_wrapper)
+                result = ExecutionReport.json_parse(json_wrapper)
+            elif(json_wrapper.get_string("e") == "listStatus"):
+                result = ListStatus.json_parse(json_wrapper)
+            return result
+
+        request = WebsocketRequest()
+        request.subscription_handler = subscription_handler
+        request.json_parser = json_parse
+        request.update_callback = callback
+        request.error_handler = error_handler
+
+        return request
