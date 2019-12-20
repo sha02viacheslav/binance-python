@@ -4,7 +4,7 @@ from binance.base.printobject import *
 from binance.model.constant import *
 
 request_client = RequestClient(api_key=g_api_key, secret_key=g_secret_key)
-order = request_client.post_order(symbol="BTCUSDT", side=OrderSide.SELL, ordertype=OrderType.MARKET, quantity=0.01)
+order = request_client.post_order(symbol="RENBTC", side=OrderSide.SELL, ordertype=OrderType.LIMIT, quantity=99, price=0.00001, timeInForce=TimeInForce.GTC)
 print("symbol: ", order.symbol)
 print("orderId: ", order.orderId)
 print("orderListId: ", order.orderListId)
