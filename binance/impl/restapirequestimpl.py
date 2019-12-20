@@ -100,6 +100,20 @@ class RestApiRequestImpl(object):
         print("=====================")
         return request
 
+    def __create_request_by_put_with_apikey(self, url, builder):
+        request = RestApiRequest()
+        request.method = "PUT"
+        request.host = self.__server_url
+        request.header.update({'Content-Type': 'application/json'})
+        request.header.update({"X-MBX-APIKEY": self.__api_key})
+        request.url = url + builder.build_url()
+        # For develop
+        print("====== Request ======")
+        print(request)
+        PrintMix.print_data(request)
+        print("=====================")
+        return request
+
     def get_system_status(self):
         builder = UrlParamsBuilder()
         request = self.__create_request_by_get("/wapi/v3/systemStatus.html", builder)
@@ -1499,6 +1513,23 @@ class RestApiRequestImpl(object):
 
         def parse(json_wrapper):
             result = json_wrapper.get_string("listenKey")
+            return result
+
+        request.json_parser = parse
+        return request
+      
+    def keep_user_data_stream(self, listenKey, accountType):
+        check_should_not_none(listenKey, "listenKey")
+        builder = UrlParamsBuilder()
+        builder.put_url("listenKey", listenKey)
+
+        if(accountType == AccountType.SPOT):
+            request = self.__create_request_by_put_with_apikey("/api/v3/userDataStream", builder)
+        elif(accountType == AccountType.MARGIN):
+            request = self.__create_request_by_put_with_apikey("/sapi/v3/userDataStream", builder)
+
+        def parse(json_wrapper):
+            result = "OK"
             return result
 
         request.json_parser = parse

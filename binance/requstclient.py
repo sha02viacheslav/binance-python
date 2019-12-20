@@ -792,3 +792,12 @@ class RequestClient(object):
         that listenKey will be returned and its validity will be extended for 60 minutes.
         """
         return call_sync(self.request_impl.start_user_data_stream(accountType))
+
+    def keep_user_data_stream(self, listenKey: 'str', accountType: 'AccountType' = AccountType.SPOT) -> any:
+        """
+        Ping/Keep-alive a ListenKey
+
+        PUT /api/v3/userDataStream    //For spot accouont
+        PUT /sapi/v1/userDataStream    //For margin account
+        """
+        return call_sync(self.request_impl.keep_user_data_stream(listenKey, accountType))

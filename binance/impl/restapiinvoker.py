@@ -40,4 +40,10 @@ def call_sync(request):
         print(response.text)
         check_response(json_wrapper)
         return request.json_parser(json_wrapper)
+    elif request.method == "PUT":
+        response = requests.put(request.host + request.url, headers=request.header)
+        json_wrapper = parse_json_from_string(response.text)
+        print(response.text)
+        check_response(json_wrapper)
+        return request.json_parser(json_wrapper)
 
