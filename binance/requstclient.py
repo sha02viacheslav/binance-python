@@ -779,3 +779,16 @@ class RequestClient(object):
         Get /sapi/v1/margin/maxTransferable
         """
         return call_sync(self.request_impl.get_margin_max_transfer(asset))
+
+    def start_user_data_stream(self, accountType: 'AccountType' = AccountType.SPOT) -> any:
+        """
+        Create a ListenKey
+
+        POST /api/v3/userDataStream    //For spot accouont
+        POST /sapi/v1/userDataStream    //For margin account
+
+        Start a new user data stream. The stream will close after 60 minutes unless a keepalive is sent. 
+        If the account has an active listenKey, 
+        that listenKey will be returned and its validity will be extended for 60 minutes.
+        """
+        return call_sync(self.request_impl.start_user_data_stream(accountType))

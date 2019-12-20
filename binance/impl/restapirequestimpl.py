@@ -51,6 +51,21 @@ class RestApiRequestImpl(object):
         print("=====================")
         return request
 
+    def __create_request_by_post_with_apikey(self, url, builder):
+        request = RestApiRequest()
+        request.method = "POST"
+        request.host = self.__server_url
+        request.header.update({'Content-Type': 'application/json'})
+        request.header.update({"X-MBX-APIKEY": self.__api_key})
+        request.post_body = builder.post_map
+        request.url = url + builder.build_url()
+        # For develop
+        print("====== Request ======")
+        print(request)
+        PrintMix.print_data(request)
+        print("=====================")
+        return request
+
     def __create_request_by_delete_with_signature(self, url, builder):
         request = RestApiRequest()
         request.method = "DELETE"
@@ -1469,6 +1484,21 @@ class RestApiRequestImpl(object):
 
         def parse(json_wrapper):
             result = json_wrapper.get_float("amount")
+            return result
+
+        request.json_parser = parse
+        return request
+      
+    def start_user_data_stream(self, accountType):
+        builder = UrlParamsBuilder()
+
+        if(accountType == AccountType.SPOT):
+            request = self.__create_request_by_post_with_apikey("/api/v3/userDataStream", builder)
+        elif(accountType == AccountType.MARGIN):
+            request = self.__create_request_by_post_with_apikey("/sapi/v1/userDataStream", builder)
+
+        def parse(json_wrapper):
+            result = json_wrapper.get_string("listenKey")
             return result
 
         request.json_parser = parse
