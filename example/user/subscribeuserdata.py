@@ -19,6 +19,12 @@ result = request_client.keep_user_data_stream(accountType=AccountType.SPOT, list
 # result = request_client.keep_user_data_stream(accountType=AccountType.MARGIN, listenKey=listen_key)
 print("Result: ", result)
 
+# Close user data stream
+request_client = RequestClient(api_key=g_api_key, secret_key=g_secret_key)
+result = request_client.close_user_data_stream(accountType=AccountType.SPOT, listenKey=listen_key)
+# result = request_client.close_user_data_stream(accountType=AccountType.MARGIN, listenKey=listen_key)
+print("Result: ", result)
+
 # logger = logging.getLogger("binance-client")
 # logger.setLevel(level=logging.INFO)
 # handler = logging.StreamHandler()
